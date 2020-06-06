@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorFondo">
+
+
+    <ImageView
+        android:layout_width="175sp"
+        android:layout_height="135sp"
+        android:background="@drawable/logo"
+        android:id="@+id/imageView"
+        android:layout_marginTop="75dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/imageView"
+        android:layout_marginTop="29dp"
+        android:layout_marginLeft="25sp"
+        android:layout_marginRight="25sp"
+        android:id="@+id/linearLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35sp"
+            android:orientation="horizontal"
+            android:background="@drawable/blanco_post_border_style">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="40sp"
+                android:layout_height="match_parent"
+                android:src="@drawable/email"
+                android:background="@drawable/fondoicono_post_border_style"/>
+
+            <EditText
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/email"
+                android:hint="@string/correoU"
+                android:inputType="textEmailAddress"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/blanco_post_border_style"
+                android:paddingLeft="5sp"
+                android:textStyle="normal"
+                android:textColorHint="@color/colorAzulClaro"
+                android:focusableInTouchMode="true"
+                android:fontFamily="sans-serif"/>
+
+        </LinearLayout>
+
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35sp"
+            android:orientation="horizontal"
+            android:background="@drawable/blanco_post_border_style">
+
+            <ImageView
+
+                android:layout_gravity="center"
+                android:layout_width="40sp"
+                android:layout_height="match_parent"
+                android:src="@drawable/candado"
+                android:background="@drawable/fondoicono_post_border_style"/>
+
+            <EditText
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/password"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/blanco_post_border_style"
+                android:paddingLeft="5sp"
+                android:textStyle="normal"
+                android:textColorHint="@color/colorAzulClaro"
+                android:focusableInTouchMode="true"
+                android:fontFamily="sans-serif"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/iniciarsession"
+            android:layout_width="match_parent"
+            android:layout_height="35sp"
+            android:layout_marginTop="9dp"
+            android:background="@drawable/blanco_post_border_style"
+            android:inputType="textCapCharacters"
+            android:onClick="validar"
+            android:text="@string/iniciarsesiion"
+            android:textColor="@color/colorFondo"
+            android:textStyle="bold" />
+
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20sp"/>
+
+
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login_button"
+            android:layout_width="match_parent"
+            android:layout_height="40sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/login_gmail"
+            android:layout_width="match_parent"
+            android:layout_height="40sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"/>
+
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/olvidastespasswor"
+            android:textColor="@color/colorBlanco"
+            android:background="@color/colorTransparente"
+            android:inputType="textCapCharacters"
+            android:onClick="olvidoPassword"
+            />
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10sp">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlanco"
+            android:background="@color/colorTransparente"
+            android:text="@string/notienecuenta"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:inputType="textCapCharacters"
+            android:onClick="registrarse"/>
+
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/login_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="25sp"
+        android:layout_height="25sp"
+        android:visibility="gone"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp" />
+
+
+</RelativeLayout>
+

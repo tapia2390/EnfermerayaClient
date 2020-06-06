@@ -1,0 +1,87 @@
+<resources>
+    <string name="app_name">Enfermera Client</string>
+    <string name="correo">Correo electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="olvidastespasswor">¿Olvidaste tu Contraseña?</string>
+    <string name="notienecuenta">¿No tienes una cuenta? <b>Regístrate aquí</b></string>
+    <string name="recuperarpasswortitle"><b>e-mail Inválido</b></string>
+    <string name="recuperarpassworddescripcion">El e-mail no es válido o no existe en nuestros registros,
+     escríbelo correctamente para que puedas actualizar tu contraseña.</string>
+    <string name="ingresoFallido"><b>Ingreso fallido</b></string>
+    <string name="ingresoFallidoDescrip">Tus datos no parecen estar correctos. Revisa tus datos y/o
+        tu acceso a Internet</string>
+    <string name="omitir">Omitir</string>
+    <string name="registrate">Regístrate aquí</string>
+    <string name="iniciarsesiion">Iniciar sesión</string>
+    <string name="registrar">Registrarse</string>
+    <string name="registrarUsuario">Registrar Usuario</string>
+    <string name="terminosycondidiones"> términos y condiciones</string>
+
+    <string name="cerrarSesion">Cerrar la sesión</string>
+
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity">Login</string>
+
+    <string name="facebook_app_id">284314096039390</string>
+    <string name="fb_login_protocol_scheme">284314096039390</string>
+
+    <string name="title_titulo_terminos">Terminos y condiciones</string>
+    <string name="title_desc_terminos">Sin descripción</string>
+    <string name="google_maps_key">AIzaSyBhOEPk6jimJH5PPH_NrEh-DNu72KAdvVo</string>
+
+    <!---
+     Client ID google gmail
+     https://developers.google.com/identity/sign-in/android/sign-in
+608437740721-0ippg12kdpi6m20v6a3pdlsjlfkkaogb.apps.googleusercontent.com/4IYbDZa5gDYC0bXomgcm6mxF
+
+
+https://developers.google.com/identity/sign-in/android/start-integrating
+https://support.google.com/googleapi/answer/6158849?hl=en#installedapplications&android
+https://console.developers.google.com/apis/dashboard?project=enfermeraya-20ced&authuser=0&pli=1
+Client Secret
+4IYbDZa5gDYC0bXomgcm6mxF
+    -->
+
+    <!--git comandos-->
+    <!--
+        git init
+        git add .
+        git commit -m "first commit"
+
+        si no esta logueado git remote add origin  //url de git proyecto https://github.com/NOMBRE_USUARIO/NOMBRE_PROYECTO.git
+         si no esta logueado  git pull origin master
+            git push -u origin master
+
+    -->
+
+    <!---Registro Usuario-->
+    <string name="nombreU">Nombre</string>
+    <string name="apellidoU">Apellido</string>
+    <string name="celularU">Celular</string>
+    <string name="correoU">Correo</string>
+    <string name="passwordU">Contraseña</string>
+    <string name="comfPasswordU">Comfirma contraseña</string>
+    <string name="fotoU">Tomar foto</string>
+    <string name="registrarse">Registarse</string>
+    <string name="actualizar">Actualizar Datos</string>
+    <string name="authorities">com.enfermeraya.enfermerayaclient.android.fileprovider</string>
+    <string name="title_activity_menu_lateral">MenuLateral</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Inicio</string>
+    <string name="menu_m_cuenta">Mi Cuenta</string>
+    <string name="menu_mis_servicios">Mis Servicios</string>
+    <string name="menu_pagos">Pagos</string>
+    <string name="menu_recomienda">Recomienda</string>
+    <string name="menu_ayuda">Ayuda</string>
+
+    <string name="home_second">Home Second</string>
+    <!-- json key AIzaSyAb1OpcP-fi7YUTeaDtARMB4HCCNEq2rk8-->
+
+
+</resources>
