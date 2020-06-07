@@ -1,16 +1,16 @@
-package com.enfermeraya.enfermerayaclient.ui.home;
+package com.enfermeraya.enfermerayaclient.ui.Recomienda;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+public class RecomiendaViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public HomeViewModel() {
+    public RecomiendaViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        mText.setValue("Recomienda");
     }
 
     public LiveData<String> getText() {

@@ -10,34 +10,67 @@
         android:name="com.enfermeraya.enfermerayaclient.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home">
+        <action
+            android:name="com.enfermeraya.enfermerayaclient.ui.MiCuenta.MiCuentaFragment"
+            android:id="@+id/action_nav_home_to_nav_mi_cuenta"
+            app:destination="@id/nav_mi_cuenta" />
 
         <action
-            android:id="@+id/action_HomeFragment_to_HomeSecondFragment"
-            app:destination="@id/nav_home_second" />
-    </fragment>
-    <fragment
-        android:id="@+id/nav_home_second"
-        android:name="com.enfermeraya.enfermerayaclient.ui.home.HomeSecondFragment"
-        android:label="@string/home_second"
-        tools:layout="HOME">
+            android:name="com.enfermeraya.enfermerayaclient.ui.MisServicios.MisServiciosFragment"
+            android:id="@+id/action_nav_home_to_nav_mis_servicios"
+            app:destination="@id/nav_mis_servicios" />
+
         <action
-            android:id="@+id/action_HomeSecondFragment_to_HomeFragment"
-            app:destination="@id/nav_home" />
+            android:name="com.enfermeraya.enfermerayaclient.ui.Pagos.PagosFragment"
+            android:id="@+id/action_nav_home_to_nav_pagos"
+            app:destination="@id/nav_pagos" />
 
-        <argument
-            android:name="myArg"
-            app:argType="string" />
+        <action
+            android:name="com.enfermeraya.enfermerayaclient.ui.Recomienda.RecomiendaFragment"
+            android:id="@+id/action_nav_home_to_nav_recomienda"
+            app:destination="@id/nav_recomienda" />
+
+
+        <action
+            android:name="com.enfermeraya.enfermerayaclient.ui.Ayuda.AyudaFragment"
+            android:id="@+id/action_nav_home_to_nav_ayuda"
+            app:destination="@id/nav_ayuda" />
+
+
+
     </fragment>
 
-    <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.enfermeraya.enfermerayaclient.ui.gallery.GalleryFragment"
-        android:label="GALERIA"
-        tools:layout="@layout/fragment_gallery" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.enfermeraya.enfermerayaclient.ui.slideshow.SlideshowFragment"
-        android:label="VIDEO"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_mi_cuenta"
+        android:name="com.enfermeraya.enfermerayaclient.ui.MiCuenta.MiCuentaFragment"
+        android:label="@string/menu_m_cuenta"
+        tools:layout="@layout/fragment_mi_cuenta" />
+
+    <fragment
+        android:id="@+id/nav_mis_servicios"
+        android:name="com.enfermeraya.enfermerayaclient.ui.MisServicios.MisServiciosFragment"
+        android:label="@string/menu_mis_servicios"
+        tools:layout="@layout/fragment_mis_servicios" />
+
+
+    <fragment
+        android:id="@+id/nav_pagos"
+        android:name="com.enfermeraya.enfermerayaclient.ui.Pagos.PagosFragment"
+        android:label="@string/menu_pagos"
+        tools:layout="@layout/fragment_pagos" />
+
+    <fragment
+        android:id="@+id/nav_recomienda"
+        android:name="com.enfermeraya.enfermerayaclient.ui.Recomienda.RecomiendaFragment"
+        android:label="@string/menu_recomienda"
+        tools:layout="@layout/fragment_recomienda" />
+
+
+    <fragment
+        android:id="@+id/nav_ayuda"
+        android:name="com.enfermeraya.enfermerayaclient.ui.Ayuda.AyudaFragment"
+        android:label="@string/menu_ayuda"
+        tools:layout="@layout/fragment_ayuda" />
+
 </navigation>

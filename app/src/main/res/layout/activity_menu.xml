@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorFondo">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/colorAzulClaro"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:paddingLeft="10sp"
+            android:text="Menú"
+            android:textColor="@color/colorBlanco"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="11dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="didTapPerfil"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingTop="11dp"
+                android:paddingBottom="11dp">
+
+                <ImageView
+
+                    android:layout_width="25sp"
+                    android:layout_height="30sp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/person"
+                    android:padding="5sp" />
+
+                <TextView
+                    android:id="@+id/lbPerfil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="8dp"
+                    android:text="Mi perfil"
+                    android:textColor="@color/colorBlanco"
+                    android:textSize="@dimen/texto" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/aviso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="didTapTerminos"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingTop="11dp"
+                android:paddingBottom="11dp">
+
+                <ImageView
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/img_legal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="8dp"
+                    android:text="Términos y condiciones"
+                    android:textColor="@color/colorBlanco"
+                    android:textSize="@dimen/texto" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="cerrarSesion"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingTop="11dp"
+                android:paddingBottom="11dp">
+
+                <ImageView
+                    android:layout_width="35sp"
+                    android:layout_height="27sp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/cerrarsession" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="8dp"
+                    android:text="Cerrar sesión"
+                    android:textColor="@color/colorBlanco"
+                    android:textSize="@dimen/texto" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Version 1.0 (1)"
+        android:gravity="center"
+        android:textColor="@color/colorBlanco"/>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="22dp"/>
+
+
+
+</LinearLayout>
+

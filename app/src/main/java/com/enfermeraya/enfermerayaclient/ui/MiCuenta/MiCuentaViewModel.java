@@ -1,16 +1,16 @@
-package com.enfermeraya.enfermerayaclient.ui.home;
+package com.enfermeraya.enfermerayaclient.ui.MiCuenta;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+public class MiCuentaViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public HomeViewModel() {
+    public MiCuentaViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        mText.setValue("Mi Cuenta");
     }
 
     public LiveData<String> getText() {

@@ -31,6 +31,8 @@
 
     <!---
      Client ID google gmail
+     https://developers.google.com/identity/sign-in/android/start
+
      https://developers.google.com/identity/sign-in/android/sign-in
 608437740721-0ippg12kdpi6m20v6a3pdlsjlfkkaogb.apps.googleusercontent.com/4IYbDZa5gDYC0bXomgcm6mxF
 
@@ -44,13 +46,12 @@ Client Secret
 
     <!--git comandos-->
     <!--
-        git init
-        git add .
-        git commit -m "first commit"
-
-        si no esta logueado git remote add origin  //url de git proyecto https://github.com/NOMBRE_USUARIO/NOMBRE_PROYECTO.git
-         si no esta logueado  git pull origin master
-            git push -u origin master
+        echo "# EnfermerayaClient" >> README.md
+git init
+git add -A
+git commit -m "first commit"
+git remote add origin https://github.com/tapia2390/EnfermerayaClient.git
+git push -u origin master
 
     -->
 
