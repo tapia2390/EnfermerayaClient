@@ -80,6 +80,9 @@ public class ComandoValidarCorreoFirebase {
                             enviarRegistroUsuario.put("correo", u.getCorreo());
                             enviarRegistroUsuario.put("foto", u.getFoto());
                             enviarRegistroUsuario.put("tokem", u.getToken());
+                            enviarRegistroUsuario.put("direccion", "");
+                            enviarRegistroUsuario.put("lat", u.getLatitud());
+                            enviarRegistroUsuario.put("long", u.getLongitud());
 
                             ref.setValue(enviarRegistroUsuario, new DatabaseReference.CompletionListener() {
                                 @Override

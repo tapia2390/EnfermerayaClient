@@ -21,6 +21,9 @@ public class Modelo {
     public double latitud;
     public double longitud;
     public GoogleMap mMap;
+    public boolean activo;
+    public long tiempo = 5000;
+    public int estado = 0;
 
     public static Modelo getInstance() {
         return ourInstance;

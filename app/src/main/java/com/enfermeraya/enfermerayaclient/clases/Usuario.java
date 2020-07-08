@@ -10,10 +10,13 @@ public class Usuario {
     private  String pasString;
     private  String foto;
     private  String token;
+    private  String direccion;
+    private  double latitud;
+    private  double longitud;
 
     public Usuario(){}
 
-    public Usuario(String key, String nombre, String apellido, String celular, String correo, String pasString, String foto, String token) {
+    public Usuario(String key, String nombre, String apellido, String celular, String correo, String pasString, String foto, String token, String direccion, double latitud, double longitud) {
         this.key = key;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -22,6 +25,9 @@ public class Usuario {
         this.pasString = pasString;
         this.foto = foto;
         this.token = token;
+        this.direccion = direccion;
+        this.latitud = latitud;
+        this.longitud = longitud;
     }
 
     public String getKey() {
@@ -86,5 +92,29 @@ public class Usuario {
 
     public void setPasString(String pasString) {
         this.pasString = pasString;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public double getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(double latitud) {
+        this.latitud = latitud;
+    }
+
+    public double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(double longitud) {
+        this.longitud = longitud;
     }
 }

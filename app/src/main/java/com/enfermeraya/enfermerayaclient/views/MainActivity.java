@@ -94,6 +94,12 @@ public class MainActivity extends Activity implements ComandoValidarUsuario.OnVa
     Utility utility;
     SweetAlertDialog pDialog;
 
+
+    /*Se declara una variable de tipo LocationManager encargada de proporcionar acceso al servicio de localización del sistema.*/
+    private LocationManager locManager;
+    /*Se declara una variable de tipo Location que accederá a la última posición conocida proporcionada por el proveedor.*/
+    private Location loc;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -179,6 +185,7 @@ public class MainActivity extends Activity implements ComandoValidarUsuario.OnVa
 
         //gps
         mapa();
+        latlong();
 
     }
 
@@ -722,6 +729,29 @@ public class MainActivity extends Activity implements ComandoValidarUsuario.OnVa
         }
     }
 
+
+    public void latlong(){
+
+        ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            Toast.makeText(getApplicationContext(),"Gps inactivo", Toast.LENGTH_LONG).show();
+            return;
+        }else
+        {
+            /*Se asigna a la clase LocationManager el servicio a nivel de sistema a partir del nombre.*/
+            locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            loc = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+            modelo.latitud = loc.getLatitude();
+            modelo.longitud = loc.getLongitude();
+            //tvLatitud.setText(String.valueOf(loc.getLatitude()));
+            //tvLongitud.setText(String.valueOf(loc.getLongitude()));
+            //tvAltura.setText(String.valueOf(loc.getAltitude()));
+            //tvPrecision.setText(String.valueOf(loc.getAccuracy()));
+        }
+    }
 
     //fin gps
 }

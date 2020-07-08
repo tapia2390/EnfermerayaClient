@@ -12,6 +12,7 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
@@ -69,16 +70,6 @@ public class MenuLateral extends AppCompatActivity  implements ComandoPerfil.OnP
         setContentView(R.layout.activity_menu_lateral);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //FloatingActionButton fab = findViewById(R.id.fab);
-        /*fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-
-
 
         if (savedInstanceState != null){
             Intent i = new Intent(getApplicationContext(), Splash.class);
@@ -138,9 +129,7 @@ public class MenuLateral extends AppCompatActivity  implements ComandoPerfil.OnP
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                //camara1.setImageBitmap(getCircularBitmap(bitmap));
 
-                //camara1.setBackgroundResource();
             }
 
         }else {
@@ -275,5 +264,18 @@ public class MenuLateral extends AppCompatActivity  implements ComandoPerfil.OnP
         canvas.drawBitmap(bitmap, rect, rect, paint);
         return output;
     }
+
+    //atras hadware
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        // TODO Auto-generated method stub
+        if (keyCode == event.KEYCODE_BACK) {
+            if(!modelo.activo){
+                return false;
+            }
+            onBackPressed();
+        }
+        return true;
+    }
+
 
 }

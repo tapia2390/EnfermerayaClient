@@ -12,5 +12,8 @@
     <color name="colorAzulOscuro">#D22936</color>
     <color name="colorAzulClaro">#6BC0DC</color>
     <color name="colorGrisClaro">#e4dbd9</color>
+    <color name="colorGris">#808080</color>
+    <color name="colorOpacidad">#1D808080</color>
+
 
 </resources>

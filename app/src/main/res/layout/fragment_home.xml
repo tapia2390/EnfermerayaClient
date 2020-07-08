@@ -4,15 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBlanco"
-    android:layout_gravity="center"
-    android:gravity="center">
+    android:id="@+id/layoutcontent">
+    
 
-      <TextView
+
+      <LinearLayout
+          android:id="@+id/containermap"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="Home"
-          android:textColor="@color/colorNegro"
-          android:gravity="center"
-          android:textSize="15sp"/>
+          android:layout_height="match_parent"
+          android:orientation="vertical">
+
+
+          <LinearLayout
+              android:id="@+id/layoutvacio"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background="@color/colorGris">
+
+          </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutmap"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+            
+                <fragment
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+
+           
+
+
+        </LinearLayout>
+
+
+
+      </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_estado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DISPONIBLE"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/colorBlanco"
+        android:background="@color/colorPrimaryDark"
+       android:layout_margin="50sp"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.7"
+        android:visibility="gone"
+        android:id="@+id/relativeopaciti">
+
+        <ImageView
+            android:id="@+id/imgopaciti"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/imgfondotransparente2"
+            />
+
+    </RelativeLayout>
+
 </RelativeLayout>

@@ -1,6 +1,8 @@
 package com.enfermeraya.enfermerayaclient.comandos;
 
 
+import android.util.Log;
+
 import com.enfermeraya.enfermerayaclient.app.Modelo;
 import com.enfermeraya.enfermerayaclient.clases.Servicios;
 import com.enfermeraya.enfermerayaclient.clases.TipoServicio;
@@ -10,6 +12,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ServerValue;
 import java.util.HashMap;
 import java.util.Map;
@@ -97,10 +100,75 @@ public class ComandoSercicio {
 
 
 
+
+    public void getServicio() {
+        modelo = Modelo.getInstance();
+
+        DatabaseReference ref = database.getReference("servicioclientes");
+        Query query = ref.orderByChild("uid").equalTo(modelo.uid);
+        query.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot snFav, String s) {
+
+
+                Servicios ser = new Servicios();
+                Long timestamp =  (Long) snFav.child("timestamp").getValue();
+                ser.setKey(snFav.getKey());
+
+                ser.setTimestamp(timestamp);
+
+                double lattitud = (double)snFav.child("latitud").getValue();
+                double longitud = (double)snFav.child("longitud").getValue();
+
+                ser.setLatitud(lattitud);
+                ser.setLongitud(longitud);
+
+                ser.setTipoServicio(snFav.child("tipoServicio").getValue().toString());
+                ser.setFecha(snFav.child("fecha").getValue().toString());
+                ser.setHoraInicio(snFav.child("horaInicio").getValue().toString());
+                ser.setHoraFin(snFav.child("horaFin").getValue().toString());
+                ser.setDireccion(snFav.child("direccion").getValue().toString());
+                ser.setInformacion(snFav.child("informacion").getValue().toString());
+                ser.setObsciones(snFav.child("obsciones").getValue().toString());
+
+
+                ser.setTitulo(snFav.child("titulo").getValue().toString());
+                ser.setEstado(snFav.child("estado").getValue().toString());
+                modelo.listServicios.add(ser);
+
+                mListener.getServicio();
+
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot snap, String s) {
+                Log.v("texto:",s);
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                Log.v("dataSnapshot",dataSnapshot.getKey());
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                Log.v("dataSnapshot",dataSnapshot.getKey());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.v("dataSnapshot",databaseError.getMessage());
+            }
+        });
+        //mListener.cargoUnaOrdenesConductor();
+    }
+
     public void  getListServicio(){
         //preguntasFrecuentes
         modelo.listServicios.clear();
-        DatabaseReference ref = database.getReference("cliente/"+modelo.uid+"/servicios/");//ruta path
+        DatabaseReference ref = database.getReference("servicioclientes");//ruta path
 
         ChildEventListener listener = new ChildEventListener(){
             @Override

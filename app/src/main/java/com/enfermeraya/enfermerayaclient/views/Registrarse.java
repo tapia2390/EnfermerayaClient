@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -509,7 +510,7 @@ public class Registrarse extends Activity implements ComandoValidarCorreoFirebas
         String foto = this.foto;
         String token = this.token;
 
-        usuario =  new Usuario("",nombre,apellido,celular,correo,password,foto,token);
+        usuario =  new Usuario("",nombre,apellido,celular,correo,password,foto,token,"",modelo.latitud,modelo.longitud);
 
         comandoValidarCorreoFirebase.registroUsuario(usuario);
     }
@@ -585,9 +586,18 @@ public class Registrarse extends Activity implements ComandoValidarCorreoFirebas
 
 
     public void terminos(View v){
+        modelo.tipoLogin = "normal";
+        setPreference("normal");
         Intent i = new Intent(getApplicationContext(), Teminos.class);
         startActivity(i);
         overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
         finish();
+    }
+
+
+    public void setPreference(String tipoLogin){
+        SharedPreferences.Editor editor = getSharedPreferences("tipoLogin", MODE_PRIVATE).edit();
+        editor.putString("tipoLogin", tipoLogin);
+        editor.apply();
     }
 }
