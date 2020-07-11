@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="75sp"
+    android:layout_height="100sp"
     android:orientation="vertical"
     android:layout_gravity="center"
     android:layout_marginBottom="15sp"
@@ -69,7 +69,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:orientation="vertical"
-          android:layout_gravity="center|right"
+          android:layout_gravity="right"
           android:gravity="center|right">
 
           <ImageView
@@ -81,7 +81,26 @@
 
       </LinearLayout>
 
+
+
    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/btnaceptservice"
+            android:layout_width="wrap_content"
+            android:layout_height="25sp"
+            android:text="Aceptar"
+            android:textSize="12sp"
+            android:textColor="@color/colorBlanco"
+            android:background="@drawable/fondo_post_border_style"
+            android:layout_gravity="right"
+            android:paddingRight="1sp"/>
+
+    </LinearLayout>
 
     <Space
         android:layout_width="match_parent"

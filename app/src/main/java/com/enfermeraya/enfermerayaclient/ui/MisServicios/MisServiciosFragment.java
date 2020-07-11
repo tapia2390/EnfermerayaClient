@@ -49,7 +49,7 @@ public class MisServiciosFragment extends Fragment implements ComandoSercicio.On
         utility = new Utility();
         comandoSercicio = new ComandoSercicio(this);
 
-
+        modelo.vistaservice =  1;
         if (utility.estado(getActivity())) {
             comandoSercicio.getListServicio();
 

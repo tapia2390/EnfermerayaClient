@@ -2,15 +2,15 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:state_pressed="true"><shape>
-        <solid android:color="@color/colorFondo"  />
+        <solid android:color="@color/colorPrimaryDark"  />
     </shape></item>
     <item>
 
         <shape>
-        <gradient android:angle="0" android:endColor="@color/colorFondo" android:startColor="@color/colorFondo" android:centerColor="@color/colorFondo" android:gradientRadius="10sp" />
-        <corners android:radius="15dp" />
+        <gradient android:angle="0" android:endColor="@color/colorPrimaryDark" android:startColor="@color/colorPrimaryDark" android:centerColor="@color/colorPrimaryDark" android:gradientRadius="10sp" />
+        <corners android:radius="5dp" />
             <stroke android:width="0.5dp"
-                android:color="@color/colorFondo"/>
+                android:color="@color/colorPrimaryDark"/>
     </shape></item>
 
 </selector>

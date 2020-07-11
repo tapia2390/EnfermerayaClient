@@ -37,12 +37,18 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.enfermeraya.enfermerayaclient.Alarm.AlarmNotificationReceiver;
 import com.enfermeraya.enfermerayaclient.Alarm.AlarmToastReceiver;
 import com.enfermeraya.enfermerayaclient.R;
 import com.enfermeraya.enfermerayaclient.Service.Tiempo;
+import com.enfermeraya.enfermerayaclient.adapter.ServicioAdapter2;
 import com.enfermeraya.enfermerayaclient.app.Modelo;
+import com.enfermeraya.enfermerayaclient.clases.Servicios;
+import com.enfermeraya.enfermerayaclient.comandos.ComandoSercicio;
+import com.enfermeraya.enfermerayaclient.models.utility.Utility;
 import com.enfermeraya.enfermerayaclient.views.MainActivity;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -59,6 +65,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -70,7 +77,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 
-public class HomeFragment extends Fragment implements OnMapReadyCallback,TimePickerDialog.OnTimeSetListener, android.app.TimePickerDialog.OnTimeSetListener {
+public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicioChangeListener,OnMapReadyCallback,TimePickerDialog.OnTimeSetListener, android.app.TimePickerDialog.OnTimeSetListener {
 
     private HomeViewModel homeViewModel;
     Modelo modelo = Modelo.getInstance();
@@ -82,6 +89,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,TimePic
     LinearLayout containermap;
     SweetAlertDialog pDialog;
     LinearLayout layoutvacio,layoutmap;
+    RelativeLayout listservice;
     RelativeLayout layoutcontent;
     RelativeLayout relativeopaciti;
     Date date;
@@ -91,6 +99,11 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,TimePic
     int mn=0;
     protected Handler handler;
     Tiempo tiemoService;
+    Utility utility;
+    ComandoSercicio comandoSercicio;
+    List<Servicios> serList = new ArrayList<>();
+    ServicioAdapter2 servicioAdapter;
+    RecyclerView recyclerView;
 
 
     @SuppressLint("WrongViewCast")
@@ -109,13 +122,26 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,TimePic
         containermap = (LinearLayout) root.findViewById(R.id.containermap);
         layoutvacio = (LinearLayout) root.findViewById(R.id.layoutvacio);
         layoutmap = (LinearLayout) root.findViewById(R.id.layoutmap);
+        listservice = (RelativeLayout) root.findViewById(R.id.listservice);
         layoutcontent = (RelativeLayout) root.findViewById(R.id.layoutcontent);
         relativeopaciti = (RelativeLayout) root.findViewById(R.id.relativeopaciti);
         imgopaciti = (ImageView) root.findViewById(R.id.imgopaciti);
+        recyclerView = root.findViewById(R.id.recycler_view2);
 
 
-        mapa();
-        stado();
+        modelo.vistaservice =  0;
+        utility = new Utility();
+        comandoSercicio = new ComandoSercicio(this);
+
+        if (utility.estado(getActivity())) {
+            comandoSercicio.getListServicio();
+            mapa();
+            stado();
+
+
+        }else{
+            alerta("Sin Internet","Valide la conexión a internet");
+        }
 
 
         btn_estado.setOnClickListener(new View.OnClickListener() {
@@ -148,6 +174,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,TimePic
 
                             layoutvacio.setVisibility(View.GONE);
                             layoutmap.setVisibility(View.VISIBLE);
+                            listservice.setVisibility(View.VISIBLE);
                             btn_estado.setText("DESCONECTAR");
                             hideDialog();
                             dialog.dismiss();
@@ -176,6 +203,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,TimePic
 
                     layoutvacio.setVisibility(View.VISIBLE);
                     layoutmap.setVisibility(View.GONE);
+                    listservice.setVisibility(View.GONE);
                     btn_estado.setText("DISPONIBLE");
                     modelo.estado =  0;
 
@@ -422,6 +450,34 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,TimePic
         return dir;
     }
 
+    @Override
+    public void getTipoServicio() {
+
+    }
+
+    @Override
+    public void getServicio() {
+        serList = modelo.listServicios;
+        servicioAdapter = new ServicioAdapter2(getActivity(), serList);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(servicioAdapter);
+    }
+
+    @Override
+    public void cargoServicio() {
+
+    }
+
+    @Override
+    public void errorServicio() {
+
+    }
+
+    @Override
+    public void actualizarFavorito() {
+
+    }
 
 
     /* Aqui empieza la Clase Localizacion */
@@ -599,6 +655,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,TimePic
                 Toast.makeText(getActivity(), part1 + " " + part2, Toast.LENGTH_LONG).show();
                 relativeopaciti.setVisibility(View.VISIBLE);
                 layoutmap.setVisibility(View.VISIBLE);
+                listservice.setVisibility(View.VISIBLE);
                 layoutvacio.setVisibility(View.GONE);
                 btn_estado.setVisibility(View.GONE);
 
@@ -715,11 +772,13 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,TimePic
         if(modelo.estado == 1){
             layoutvacio.setVisibility(View.GONE);
             layoutmap.setVisibility(View.VISIBLE);
+            listservice.setVisibility(View.VISIBLE);
             btn_estado.setText("DESCONECTAR");
         }
         else  if(modelo.estado == 2){
             relativeopaciti.setVisibility(View.VISIBLE);
             layoutmap.setVisibility(View.VISIBLE);
+            listservice.setVisibility(View.VISIBLE);
             layoutvacio.setVisibility(View.GONE);
             btn_estado.setVisibility(View.GONE);
         }

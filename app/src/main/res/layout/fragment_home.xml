@@ -30,7 +30,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:visibility="gone">
-            
+
                 <fragment
                     android:id="@+id/map"
                     android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -38,7 +38,6 @@
                     android:layout_height="match_parent"/>
 
 
-           
 
 
         </LinearLayout>
@@ -72,6 +71,23 @@
             android:background="@drawable/imgfondotransparente2"
             />
 
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listservice"
+        android:padding="15sp"
+        android:visibility="gone">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view2"
+            android:layout_width="369dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="100sp"/>
     </RelativeLayout>
 
 </RelativeLayout>

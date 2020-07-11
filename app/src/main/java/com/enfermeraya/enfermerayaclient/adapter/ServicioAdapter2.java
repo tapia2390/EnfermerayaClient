@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -58,6 +59,12 @@ public class ServicioAdapter2 extends RecyclerView.Adapter<ServicioAdapter2.Serv
         holder.text_dir.setText(direccion);
         holder.text_nombre.setText(titlo);
         holder.text_fecha.setText(fecha);
+
+        if(modelo.vistaservice == 1){
+            holder.btnaceptservice.setVisibility(View.GONE);
+        }else{
+            holder.btnaceptservice.setVisibility(View.VISIBLE);
+        }
 
 
         if(filteredNameList.get(position).getEstado().equals("true")){
@@ -148,6 +155,7 @@ public class ServicioAdapter2 extends RecyclerView.Adapter<ServicioAdapter2.Serv
         private TextView text_nombre;
         private TextView text_fecha;
         private LinearLayout layuotdata;
+        private Button btnaceptservice;
 
         ServicioViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -156,6 +164,7 @@ public class ServicioAdapter2 extends RecyclerView.Adapter<ServicioAdapter2.Serv
             text_nombre = itemView.findViewById(R.id.text_nombre);
             text_fecha = itemView.findViewById(R.id.text_fecha);
             layuotdata = itemView.findViewById(R.id.layuotdata);
+            btnaceptservice = itemView.findViewById(R.id.btnaceptservice);
         }
     }
 

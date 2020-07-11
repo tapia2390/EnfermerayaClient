@@ -24,6 +24,7 @@ public class Modelo {
     public boolean activo;
     public long tiempo = 5000;
     public int estado = 0;
+    public int vistaservice = 0;
 
     public static Modelo getInstance() {
         return ourInstance;
