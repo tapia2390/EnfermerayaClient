@@ -6,6 +6,7 @@ import android.util.Log;
 import com.enfermeraya.enfermerayaclient.app.Modelo;
 import com.enfermeraya.enfermerayaclient.clases.Servicios;
 import com.enfermeraya.enfermerayaclient.clases.TipoServicio;
+import com.enfermeraya.enfermerayaclient.notificacion.Token;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -30,6 +31,12 @@ public class ComandoSercicio {
 
     //interface del listener de la actividad interesada
     private OnSercicioChangeListener mListener;
+
+    public void updateToken(String token){
+
+        final DatabaseReference ref = database.getReference("cliente/"+modelo.uid+"/tokem/");//ruta path
+        ref.setValue(token);
+    }
 
     /**
      * Interfaz para avisar de eventos a los interesados
@@ -134,6 +141,8 @@ public class ComandoSercicio {
 
                 ser.setTitulo(snFav.child("titulo").getValue().toString());
                 ser.setEstado(snFav.child("estado").getValue().toString());
+                ser.setUid(snFav.child("uid").getValue().toString());
+                ser.setToken(snFav.child("token").getValue().toString());
                 modelo.listServicios.add(ser);
 
                 mListener.getServicio();
@@ -188,8 +197,8 @@ public class ComandoSercicio {
 
                 ser.setTipoServicio(snFav.child("tipoServicio").getValue().toString());
                 ser.setFecha(snFav.child("fecha").getValue().toString());
-                ser.setHoraInicio(snFav.child("horaInicio").getValue().toString());
-                ser.setHoraFin(snFav.child("horaFin").getValue().toString());
+                ser.setHoraServicio(snFav.child("horaServicio").getValue().toString());
+
                 ser.setDireccion(snFav.child("direccion").getValue().toString());
                 ser.setInformacion(snFav.child("informacion").getValue().toString());
                 ser.setObsciones(snFav.child("obsciones").getValue().toString());
@@ -197,6 +206,8 @@ public class ComandoSercicio {
 
                 ser.setTitulo(snFav.child("titulo").getValue().toString());
                 ser.setEstado(snFav.child("estado").getValue().toString());
+                ser.setUid(snFav.child("uid").getValue().toString());
+                ser.setToken(snFav.child("token").getValue().toString());
                 modelo.listServicios.add(ser);
 
                 mListener.getServicio();

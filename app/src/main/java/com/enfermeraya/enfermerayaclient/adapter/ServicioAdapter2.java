@@ -3,6 +3,7 @@ package com.enfermeraya.enfermerayaclient.adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,9 +24,18 @@ import com.enfermeraya.enfermerayaclient.R;
 import com.enfermeraya.enfermerayaclient.app.Modelo;
 import com.enfermeraya.enfermerayaclient.clases.Servicios;
 import com.enfermeraya.enfermerayaclient.comandos.ComandoSercicio;
+import com.enfermeraya.enfermerayaclient.notificacion.APIService;
+import com.enfermeraya.enfermerayaclient.notificacion.Client;
+import com.enfermeraya.enfermerayaclient.notificacion.Data;
+import com.enfermeraya.enfermerayaclient.notificacion.MyResponse;
+import com.enfermeraya.enfermerayaclient.notificacion.NotificationSender;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ServicioAdapter2 extends RecyclerView.Adapter<ServicioAdapter2.ServicioViewHolder> implements Filterable, ComandoSercicio.OnSercicioChangeListener {
 
@@ -34,6 +45,8 @@ public class ServicioAdapter2 extends RecyclerView.Adapter<ServicioAdapter2.Serv
     ComandoSercicio comandoSercicio;
     Modelo modelo = Modelo.getInstance();
 
+    private APIService apiService;
+
     public ServicioAdapter2(Context context, List<Servicios> nameList) {
         super();
         this.context = context;
@@ -41,6 +54,8 @@ public class ServicioAdapter2 extends RecyclerView.Adapter<ServicioAdapter2.Serv
         this.filteredNameList = nameList;
 
         comandoSercicio = new ComandoSercicio(this);
+        apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
+
 
     }
 
@@ -66,6 +81,12 @@ public class ServicioAdapter2 extends RecyclerView.Adapter<ServicioAdapter2.Serv
             holder.btnaceptservice.setVisibility(View.VISIBLE);
         }
 
+        holder.btnaceptservice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendNotifications(filteredNameList.get(position).getToken(),"Servico","servicio aceptado");
+            }
+        });
 
         if(filteredNameList.get(position).getEstado().equals("true")){
             holder.image_fav.setBackgroundResource(R.drawable.start);
@@ -168,4 +189,30 @@ public class ServicioAdapter2 extends RecyclerView.Adapter<ServicioAdapter2.Serv
         }
     }
 
+
+    //puch
+    public void sendNotifications(String usertoken, String title, String message) {
+        Data data = new Data(title, message);
+        NotificationSender sender = new NotificationSender(data, usertoken);
+        apiService.sendNotifcation(sender).enqueue(new Callback<MyResponse>() {
+            @Override
+            public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                if (response.code() == 200) {
+                    if (response.body().success != 1) {
+                        Toast.makeText(context, "Failed ", Toast.LENGTH_LONG).show();
+                    }else{
+                        Toast.makeText(context, "servicio aceptado ", Toast.LENGTH_LONG).show();
+                    }
+                }
+                else{
+                    Toast.makeText(context, "Error code" + response.code(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MyResponse> call, Throwable t) {
+
+            }
+        });
+    }
 }

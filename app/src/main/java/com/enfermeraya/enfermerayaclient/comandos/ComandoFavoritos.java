@@ -111,8 +111,7 @@ public class ComandoFavoritos {
                     fav.setLongitud(longitud);
                     fav.setTipoServicio(snFav.child("tipoServicio").getValue().toString());
                     fav.setFecha(snFav.child("fecha").getValue().toString());
-                    fav.setHoraInicio(snFav.child("horaInicio").getValue().toString());
-                    fav.setHoraFin(snFav.child("horaFin").getValue().toString());
+                    fav.setHoraServicio(snFav.child("horaServicio").getValue().toString());
                     fav.setDireccion(snFav.child("direccion").getValue().toString());
                     fav.setInformacion(snFav.child("informacion").getValue().toString());
                     fav.setObsciones(snFav.child("obsciones").getValue().toString());

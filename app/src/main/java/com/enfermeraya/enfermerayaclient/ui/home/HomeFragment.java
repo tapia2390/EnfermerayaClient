@@ -49,6 +49,7 @@ import com.enfermeraya.enfermerayaclient.app.Modelo;
 import com.enfermeraya.enfermerayaclient.clases.Servicios;
 import com.enfermeraya.enfermerayaclient.comandos.ComandoSercicio;
 import com.enfermeraya.enfermerayaclient.models.utility.Utility;
+import com.enfermeraya.enfermerayaclient.notificacion.Token;
 import com.enfermeraya.enfermerayaclient.views.MainActivity;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -58,6 +59,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -74,7 +76,14 @@ import java.util.Locale;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
+import com.google.android.gms.maps.model.VisibleRegion;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicioChangeListener,OnMapReadyCallback,TimePickerDialog.OnTimeSetListener, android.app.TimePickerDialog.OnTimeSetListener {
@@ -88,15 +97,15 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
     Button btn_estado;
     LinearLayout containermap;
     SweetAlertDialog pDialog;
-    LinearLayout layoutvacio,layoutmap;
+    LinearLayout layoutvacio, layoutmap;
     RelativeLayout listservice;
     RelativeLayout layoutcontent;
     RelativeLayout relativeopaciti;
     Date date;
     DateFormat hourFormat;
     ImageView imgopaciti;
-    int hr=0;
-    int mn=0;
+    int hr = 0;
+    int mn = 0;
     protected Handler handler;
     Tiempo tiemoService;
     Utility utility;
@@ -129,7 +138,7 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
         recyclerView = root.findViewById(R.id.recycler_view2);
 
 
-        modelo.vistaservice =  0;
+        modelo.vistaservice = 0;
         utility = new Utility();
         comandoSercicio = new ComandoSercicio(this);
 
@@ -137,10 +146,10 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
             comandoSercicio.getListServicio();
             mapa();
             stado();
+            UpdateToken();
 
-
-        }else{
-            alerta("Sin Internet","Valide la conexión a internet");
+        } else {
+            alerta("Sin Internet", "Valide la conexión a internet");
         }
 
 
@@ -150,8 +159,7 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
             public void onClick(View v) {
 
 
-
-                if(btn_estado.getText().toString().equals("DISPONIBLE")){
+                if (btn_estado.getText().toString().equals("DISPONIBLE")) {
 
 
                     AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
@@ -178,7 +186,7 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
                             btn_estado.setText("DESCONECTAR");
                             hideDialog();
                             dialog.dismiss();
-                            modelo.estado =  1;
+                            modelo.estado = 1;
                         }
                     });
 
@@ -187,7 +195,7 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
                         @Override
                         public void onClick(View view) {
                             customTimePickerDialog();
-                             hideDialog();
+                            hideDialog();
                             dialog.dismiss();
 
 
@@ -199,13 +207,13 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
                         }
                     });
 
-                }else{
+                } else {
 
                     layoutvacio.setVisibility(View.VISIBLE);
                     layoutmap.setVisibility(View.GONE);
                     listservice.setVisibility(View.GONE);
                     btn_estado.setText("DISPONIBLE");
-                    modelo.estado =  0;
+                    modelo.estado = 0;
 
                 }
 
@@ -220,8 +228,7 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
     }
 
 
-
-    public void alertaEstado(){
+    public void alertaEstado() {
 
        /* new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
                 .setTitleText("")
@@ -261,16 +268,18 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
         if (pDialog != null)
             pDialog.dismiss();
     }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         modelo.mMap = googleMap;
-        goolemapa(modelo.mMap );
+        goolemapa(modelo.mMap);
+
 
     }
 
 
-    public void goolemapa(GoogleMap mMap){
+    public void goolemapa(GoogleMap mMap) {
         modelo.mMap = mMap;
         //5.059288, -75.497652
         LatLng ctg = new LatLng(modelo.latitud, modelo.longitud);// colombia
@@ -282,20 +291,20 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
 
         // float verde = BitmapDescriptorFactory.HUE_GREEN;
         //marcadorColor(modelo.latitud, modelo.longitud,"Pais Colombia", verde,mMap);
-        marcadorImg(modelo.latitud, modelo.longitud,"Pais Colombia",mMap);
+        marcadorImg(modelo.latitud, modelo.longitud, "Pais Colombia", mMap);
         //setLocation();
 
     }
 
-    private void marcadorColor(double lat, double lng, String  pais, float color, GoogleMap mMap){
+    private void marcadorColor(double lat, double lng, String pais, float color, GoogleMap mMap) {
         mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).title(pais).icon(BitmapDescriptorFactory.defaultMarker(color)));
     }
 
-    private void marcadorImg(double lat, double lng, String  pais, GoogleMap mMap){
+    private void marcadorImg(double lat, double lng, String pais, GoogleMap mMap) {
         //modelo.mMap = mMap;
         //   MarkerOptions marker = new MarkerOptions().position(new LatLng(lat, lng)).title("Enfermera");
 
-        LatLng  latLng = new LatLng(lat,lng);
+        LatLng latLng = new LatLng(lat, lng);
 
         modelo.mMap.clear();
         modelo.mMap.addMarker(new MarkerOptions()
@@ -311,21 +320,20 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
             modelo.mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
                 @Override
                 public void onMarkerDragStart(Marker marker) {
-                    Log.v("1","1");
+                    Log.v("1", "1");
                 }
 
                 @Override
                 public void onMarkerDrag(Marker marker) {
-                    Log.v("2","2");
+                    Log.v("2", "2");
                 }
 
                 @Override
                 public void onMarkerDragEnd(Marker marker) {
-                    Log.v("3","3");
+                    Log.v("3", "3");
                     getCity(marker.getPosition());
                 }
             });
-
 
             modelo.mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                 @Override
@@ -334,7 +342,6 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
                     return false;
                 }
             });
-
 
 
             modelo.mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -351,7 +358,7 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
     }
 
     //GPS
-    public void mapa(){
+    public void mapa() {
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION,}, 1000);
         } else {
@@ -374,9 +381,10 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
         }
         mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, (LocationListener) Local);
         mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, (LocationListener) Local);
-        Toast.makeText(getActivity(),"Localización agregada", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Localización agregada", Toast.LENGTH_SHORT).show();
 
     }
+
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == 1000) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -385,18 +393,19 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
             }
         }
     }
+
     public void setLocation(Location loc) {
         //Obtener la direccion de la calle a partir de la latitud y la longitud
         if (loc.getLatitude() != 0.0 && loc.getLongitude() != 0.0) {
             try {
 
                 try {
-                    if(geocoder == null){
+                    if (geocoder == null) {
                         geocoder = new Geocoder(getActivity(), Locale.getDefault());
                     }
 
 
-                }catch (Exception e){
+                } catch (Exception e) {
                     String ex = e.getMessage();
                 }
 
@@ -406,7 +415,7 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
                     Address DirCalle = list.get(0);
 
 
-                    String dir =  DirCalle.getAddressLine(0);
+                    String dir = DirCalle.getAddressLine(0);
 
                     // Toast.makeText(getApplicationContext(),"Mi direccion es "+ dir, Toast.LENGTH_SHORT).show();
                     String[] parts = dir.split(",");
@@ -420,11 +429,11 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
     }
 
 
-    public  String getCity(LatLng posicion){
+    public String getCity(LatLng posicion) {
 
         Geocoder geocoder;
         List<Address> addresses;
-        String dir  = "";
+        String dir = "";
 
         geocoder = new Geocoder(getActivity(), Locale.getDefault());
 
@@ -443,7 +452,7 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
 
 
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             String ex = e.getMessage();
             e.printStackTrace();
         }
@@ -483,12 +492,15 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
     /* Aqui empieza la Clase Localizacion */
     public class Localizacion implements LocationListener {
         HomeFragment mainActivity;
+
         public HomeFragment getMainActivity() {
             return mainActivity;
         }
+
         public void setMainActivity(HomeFragment mainActivity) {
             this.mainActivity = mainActivity;
         }
+
         @Override
         public void onLocationChanged(Location loc) {
             // Este metodo se ejecuta cada vez que el GPS recibe nuevas coordenadas
@@ -502,19 +514,22 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
 
             // this.mainActivity.setLocation(loc);
         }
+
         @Override
         public void onProviderDisabled(String provider) {
             // Este metodo se ejecuta cuando el GPS es desactivado
 
-            Toast.makeText(getActivity().getApplicationContext(),"GPS Desactivado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity().getApplicationContext(), "GPS Desactivado", Toast.LENGTH_SHORT).show();
         }
+
         @Override
         public void onProviderEnabled(String provider) {
             // Este metodo se ejecuta cuando el GPS es activado
 
-            Toast.makeText(getActivity().getApplicationContext(),"GPS Activado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity().getApplicationContext(), "GPS Activado", Toast.LENGTH_SHORT).show();
             goolemapa(modelo.mMap);
         }
+
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
             switch (status) {
@@ -532,11 +547,10 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
     }
 
 
-
     //fin gps
 
 
-    public void alerta(String titulo, String descripcion){
+    public void alerta(String titulo, String descripcion) {
         new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
                 .setTitleText(titulo)
                 .setContentText(descripcion)
@@ -553,19 +567,18 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
     }
 
 
-
     //__methode will be call when we click on "Custom Date Picker Dialog" and will be show the custom date selection dilog.
     public void customTimePickerDialog() {
         Calendar now = Calendar.getInstance();
         TimePickerDialog dpd = TimePickerDialog.newInstance(this, now.get(Calendar.HOUR), now.get(Calendar.MINUTE), false);
 
         dpd.setAccentColor(getResources().getColor(R.color.colorVerdeOscuro));
-        dpd.setMinTime(now.get(Calendar.HOUR),now.get(Calendar.MINUTE),now.get(Calendar.SECOND));
+        dpd.setMinTime(now.get(Calendar.HOUR), now.get(Calendar.MINUTE), now.get(Calendar.SECOND));
         dpd.show(getActivity().getFragmentManager(), "Timepickerdialog");
 
 
-        hr= now.get(Calendar.HOUR);
-        mn= now.get(Calendar.MINUTE);
+        hr = now.get(Calendar.HOUR);
+        mn = now.get(Calendar.MINUTE);
 
 
         dpd.setOnCancelListener(new DialogInterface.OnCancelListener() {
@@ -579,8 +592,6 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
     }
 
 
-
-
     //___this is the listener callback method will be call on time selection by default date picker.
     @Override
     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
@@ -589,7 +600,7 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
         Calendar datetime = Calendar.getInstance();
         datetime.set(Calendar.HOUR_OF_DAY, hourOfDay);
         datetime.set(Calendar.MINUTE, minute);
-        date=datetime.getTime();
+        date = datetime.getTime();
 
         //Toast.makeText(this, "Selected by custom time picker : " + hourOfDay + ":" + minute, Toast.LENGTH_SHORT).show();
         //Toast.makeText(getApplicationContext(),""+hourFormat.format(date), Toast.LENGTH_LONG).show();
@@ -620,7 +631,7 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
             part2 = "PM";
         }
 
-        int totalmin =0;
+        int totalmin = 0;
         int hora = datetime.get(Calendar.HOUR);
         int min = datetime.get(Calendar.MINUTE);
 
@@ -629,37 +640,36 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
         int dia = datetime.get(Calendar.DAY_OF_MONTH);
 
 
-
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
         Date fechaI = null, fechaF = null;
         try {
-            String f1 =  dia +"/"+mes+ "/"+year  +" "+hora+":" + min + ":00";
-            String f2 =  dia +"/"+mes+ "/"+year  +" "+hr+":" + mn + ":00";
+            String f1 = dia + "/" + mes + "/" + year + " " + hora + ":" + min + ":00";
+            String f2 = dia + "/" + mes + "/" + year + " " + hr + ":" + mn + ":00";
             fechaI = simpleDateFormat.parse(f1);
             //fechaF puede ser la fecha actual o tu puedes asignarala,
             //por ejemplo: fechaF = simpleDateFormat.parse("2/6/2016 15:40:42");
             // fechaF = new Date(System.currentTimeMillis());
-            fechaF =  simpleDateFormat.parse(f2);
+            fechaF = simpleDateFormat.parse(f2);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
 
-        String tiempo = getDiferencia(fechaF , fechaI);
-        int time =  Integer.parseInt(tiempo);
-            if(time <=0){
+        String tiempo = getDiferencia(fechaF, fechaI);
+        int time = Integer.parseInt(tiempo);
+        if (time <= 0) {
 
-                Toast.makeText(getActivity(),"La diferencia debe ser minimo 1 minuto", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "La diferencia debe ser minimo 1 minuto", Toast.LENGTH_LONG).show();
 
-            }else {
-                Toast.makeText(getActivity(), part1 + " " + part2, Toast.LENGTH_LONG).show();
-                relativeopaciti.setVisibility(View.VISIBLE);
-                layoutmap.setVisibility(View.VISIBLE);
-                listservice.setVisibility(View.VISIBLE);
-                layoutvacio.setVisibility(View.GONE);
-                btn_estado.setVisibility(View.GONE);
+        } else {
+            Toast.makeText(getActivity(), part1 + " " + part2, Toast.LENGTH_LONG).show();
+            relativeopaciti.setVisibility(View.VISIBLE);
+            layoutmap.setVisibility(View.VISIBLE);
+            listservice.setVisibility(View.VISIBLE);
+            layoutvacio.setVisibility(View.GONE);
+            btn_estado.setVisibility(View.GONE);
 
-                modelo.tiempo = time;
+            modelo.tiempo = time;
 
 
 
@@ -671,9 +681,9 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
                 }*/
 
 
-                tiemoService = new Tiempo(getActivity(), time);
-                tiemoService.timerTiempo();
-                modelo.estado =  2;
+            tiemoService = new Tiempo(getActivity(), time);
+            tiemoService.timerTiempo();
+            modelo.estado = 2;
 
                /* new Handler().postDelayed(new Runnable() {
                     @Override
@@ -683,21 +693,15 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
                 },(time *1000)*100);*/
 
 
-
-
-
-               // startAlarm(false, false, time);
-            }
-
-
+            // startAlarm(false, false, time);
+        }
 
 
         //modelo.mMap.setOnMarkerDragListener(null);
-       // modelo.mMap.setOnMapClickListener(null);
+        // modelo.mMap.setOnMapClickListener(null);
 
 
     }
-
 
 
     private void startAlarm(boolean isNotification, boolean isRepeat, int tiempo) {
@@ -705,28 +709,24 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
         Intent myIntent;
         PendingIntent pendingIntent;
 
-        if(!isNotification)
-        {
-            myIntent = new Intent(getActivity(),AlarmToastReceiver.class);
-            pendingIntent = PendingIntent.getBroadcast(getActivity(),0,myIntent,0);
-        }
-        else{
-            myIntent = new Intent(getActivity(),AlarmNotificationReceiver.class);
-            pendingIntent = PendingIntent.getBroadcast(getActivity(),0,myIntent,0);
+        if (!isNotification) {
+            myIntent = new Intent(getActivity(), AlarmToastReceiver.class);
+            pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, myIntent, 0);
+        } else {
+            myIntent = new Intent(getActivity(), AlarmNotificationReceiver.class);
+            pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, myIntent, 0);
         }
 
-        if(!isRepeat){
-            manager.set(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime()+tiempo *(60 * 1000),pendingIntent);
+        if (!isRepeat) {
+            manager.set(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() + tiempo * (60 * 1000), pendingIntent);
 
-        }
-
-        else {
+        } else {
             manager.setRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() + 3000, 60 * 1000, pendingIntent);
         }
     }
 
 
-    public String getDiferencia(Date fechaInicial, Date fechaFinal){
+    public String getDiferencia(Date fechaInicial, Date fechaFinal) {
 
         long diferencia = fechaFinal.getTime() - fechaInicial.getTime();
 
@@ -752,13 +752,13 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
        /* return "diasTranscurridos: " + diasTranscurridos + " , horasTranscurridos: " + horasTranscurridos +
                 " , minutosTranscurridos: " + minutosTranscurridos + " , segsTranscurridos: " + segsTranscurridos;*/
 
-       return minutosTranscurridos+"";
+        return minutosTranscurridos + "";
 
 
     }
 
 
-    public void visible(){
+    public void visible() {
         Toast.makeText(getActivity(), "Activado", Toast.LENGTH_LONG).show();
         relativeopaciti.setVisibility(View.GONE);
         btn_estado.setText("DESCONECTAR");
@@ -767,26 +767,31 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
     }
 
 
-    public void stado(){
+    public void stado() {
 
-        if(modelo.estado == 1){
+        if (modelo.estado == 1) {
             layoutvacio.setVisibility(View.GONE);
             layoutmap.setVisibility(View.VISIBLE);
             listservice.setVisibility(View.VISIBLE);
             btn_estado.setText("DESCONECTAR");
-        }
-        else  if(modelo.estado == 2){
+        } else if (modelo.estado == 2) {
             relativeopaciti.setVisibility(View.VISIBLE);
             layoutmap.setVisibility(View.VISIBLE);
             listservice.setVisibility(View.VISIBLE);
             layoutvacio.setVisibility(View.GONE);
             btn_estado.setVisibility(View.GONE);
-        }
-        else{
-            Toast.makeText(getActivity(),"Estado inactivo", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getActivity(), "Estado inactivo", Toast.LENGTH_LONG).show();
         }
 
     }
 
+    private void UpdateToken(){
+        FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+        String refreshToken= FirebaseInstanceId.getInstance().getToken();
+        Token token= new Token(refreshToken);
+        comandoSercicio.updateToken(refreshToken);
+        //FirebaseDatabase.getInstance().getReference("cliente/"+modelo.uid+"/tokem").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(token);
+    }
 
 }
