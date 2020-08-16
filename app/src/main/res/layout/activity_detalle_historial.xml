@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btntitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlanco"
+        android:background="@color/colorFondo"
+        android:layout_gravity="center"
+        android:text="Detalle Servicio"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="5sp"/>
+
+    <ImageView
+        android:id="@+id/camara1"
+        android:layout_width="90sp"
+        android:layout_height="90sp"
+        android:layout_below="@+id/textView5"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:src="@drawable/camara"
+        android:onClick="camara1" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="5sp"/>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10sp">
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="5sp"/>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardUseCompatPadding="true">
+
+                <!-- Indicador de estado -->
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:background="@color/colorFondo" />
+
+                <RelativeLayout
+                    android:layout_width="412dp"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="8dp">
+
+                    <TextView
+                        android:id="@+id/txtfecha"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="8dp"
+                        android:text="7 Octubre 2017" />
+
+                    <View
+                        android:id="@+id/vertical_separator"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_toEndOf="@+id/txtfecha"
+                        android:layout_toRightOf="@+id/txtfecha"
+                        android:background="@color/colorFondo" />
+
+                    <TextView
+                        android:id="@+id/txtservicio"
+                        style="@style/Base.TextAppearance.AppCompat.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_toEndOf="@+id/vertical_separator"
+                        android:layout_toRightOf="@+id/vertical_separator"
+                        android:text="Consulta Medicina General" />
+
+                    <TextView
+                        android:id="@+id/txtnombre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtservicio"
+                        android:layout_alignStart="@+id/txtservicio"
+                        android:layout_alignLeft="@+id/txtservicio"
+                        android:text="Paciente Jorge: Ramos" />
+
+                    <Button
+                        android:id="@+id/btnestado"
+                        style="@style/Base.Widget.AppCompat.Button.Borderless"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="4dp"
+                        android:layout_toRightOf="@id/vertical_separator"
+                        android:text="Estado"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/text_medical_center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtnombre"
+                        android:layout_alignStart="@+id/txtnombre"
+                        android:layout_alignLeft="@+id/txtnombre"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="dirección" />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+
+
+            <!--observaciones-->
+            <TextView
+                style="@style/Base.TextAppearance.AppCompat.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_toEndOf="@+id/vertical_separator"
+                android:layout_toRightOf="@+id/vertical_separator"
+                android:text="Observaciones"
+                android:padding="5sp"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardUseCompatPadding="true">
+
+                <!-- Indicador de estado -->
+                <View
+                    android:id="@+id/indicator_appointment_status"
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:background="@color/colorFondo" />
+
+                <RelativeLayout
+                    android:layout_width="412dp"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="16dp"
+                    android:paddingRight="16dp">
+
+
+                    <EditText
+                        android:id="@+id/observacionesenferm"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="top"
+                        android:hint="Observaciones servicio"
+                        android:inputType="text"
+                        android:background="@null"/>
+
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <!--medicamentos-->
+            <TextView
+                style="@style/Base.TextAppearance.AppCompat.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_toEndOf="@+id/vertical_separator"
+                android:layout_toRightOf="@+id/vertical_separator"
+                android:text="Medicamentos"
+                android:padding="5sp"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardUseCompatPadding="true">
+
+                <!-- Indicador de estado -->
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:background="@color/colorFondo" />
+
+                <RelativeLayout
+                    android:layout_width="412dp"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="16dp"
+                    android:paddingRight="16dp">
+
+
+                    <EditText
+                        android:id="@+id/medicamentos"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Medicamentos recetados"
+                        android:gravity="top"
+                        android:inputType="text"
+                        android:background="@null"/>
+
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="15sp"/>
+
+            <Button
+                android:id="@+id/btnaceptar"
+                android:layout_width="250sp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlanco"
+                android:background="@color/colorFondo"
+                android:layout_gravity="center"
+                android:text="Finalizar"
+                android:onClick="finalizar"/>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

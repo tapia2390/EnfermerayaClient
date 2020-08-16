@@ -210,6 +210,11 @@ public class MenuLateral extends AppCompatActivity  implements ComandoPerfil.OnP
 
         hideDialog();
         txtnombre.setText("" + modelo.usuario.getNombre());
+        if(modelo.usuario.getEstado()){
+            modelo.estado = 1;
+        }else{
+            modelo.estado = 3;
+        }
         txt_calificacion.setText("3.5");
         if (!modelo.usuario.getFoto().equals("")) {
             camara1.setImageBitmap(getCircularBitmap(decodeBase64(modelo.usuario.getFoto())));

@@ -86,6 +86,7 @@ git push -u origin master
     <string name="menu_pagos">Pagos</string>
     <string name="menu_recomienda">Recomienda</string>
     <string name="menu_ayuda">Ayuda</string>
+    <string name="menu_historial">Historial</string>
 
     <string name="home_second">Home Second</string>
     <!-- json key AIzaSyAb1OpcP-fi7YUTeaDtARMB4HCCNEq2rk8-->

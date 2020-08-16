@@ -163,7 +163,7 @@ public class MainActivity extends Activity implements ComandoValidarUsuario.OnVa
 
         //gogle
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.google_api_key))
+                .requestIdToken(getString(R.string.google_maps_key))
                 .requestEmail()
                 .build();
 

@@ -29,6 +29,8 @@ import com.enfermeraya.enfermerayaclient.notificacion.Client;
 import com.enfermeraya.enfermerayaclient.notificacion.Data;
 import com.enfermeraya.enfermerayaclient.notificacion.MyResponse;
 import com.enfermeraya.enfermerayaclient.notificacion.NotificationSender;
+import com.enfermeraya.enfermerayaclient.views.DetalleHistorial;
+import com.enfermeraya.enfermerayaclient.views.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,16 +77,68 @@ public class ServicioAdapter2 extends RecyclerView.Adapter<ServicioAdapter2.Serv
         holder.text_nombre.setText(titlo);
         holder.text_fecha.setText(fecha);
 
-        if(modelo.vistaservice == 1){
+        if(filteredNameList.get(position).getEstado().equals("false")){
+
+            if(modelo.vistaservice ==0){
+                holder.btnaceptservice.setText("Aceptar");
+                holder.btnaceptservice.setVisibility(View.VISIBLE);
+                holder.txt_estado.setVisibility(View.GONE);
+            }else{
+                holder.btnaceptservice.setVisibility(View.GONE);
+                holder.txt_estado.setText("Pendiente");
+                holder.txt_estado.setVisibility(View.VISIBLE);
+            }
+
+        }
+        else if(filteredNameList.get(position).getEstado().equals("Aceptado")){
+
+            if(modelo.vistaservice ==0){
+                holder.btnaceptservice.setText("Detalle");
+                holder.btnaceptservice.setVisibility(View.VISIBLE);
+                holder.txt_estado.setVisibility(View.GONE);
+            }else{
+                holder.btnaceptservice.setVisibility(View.GONE);
+                holder.txt_estado.setText("Detalle");
+                holder.txt_estado.setVisibility(View.VISIBLE);
+            }
+
+        }
+        else if(filteredNameList.get(position).getEstado().equals("Terminado")){
             holder.btnaceptservice.setVisibility(View.GONE);
-        }else{
-            holder.btnaceptservice.setVisibility(View.VISIBLE);
+            holder.txt_estado.setText("Terminado");
+            holder.txt_estado.setVisibility(View.VISIBLE);
+        }
+        else{
+            holder.btnaceptservice.setVisibility(View.GONE);
+            holder.txt_estado.setText("Finalizado");
+            holder.txt_estado.setVisibility(View.VISIBLE);
         }
 
         holder.btnaceptservice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendNotifications(filteredNameList.get(position).getToken(),"Servico","servicio aceptado");
+
+                if(holder.btnaceptservice.getText().equals("Aceptar")){
+                    comandoSercicio.servicoAceptadouidCliente(modelo.uid,filteredNameList.get(position).getKey(),"Aceptado");
+                    sendNotifications(filteredNameList.get(position).getToken(),"Servico","servicio aceptado");
+                    holder.btnaceptservice.setText("Detalle");
+
+                }else{
+
+                    /*comandoSercicio.servicoAceptadouidCliente(modelo.uid,filteredNameList.get(position).getKey(),"Terminado");
+                    sendNotifications(filteredNameList.get(position).getToken(),"Servico","servicio Terminado");
+                    holder.btnaceptservice.setVisibility(View.GONE);
+                    holder.txt_estado.setText("Terminado");
+                    holder.txt_estado.setVisibility(View.VISIBLE);*/
+                    filteredNameList.get(position).setEstado("Aceptado");
+                    modelo.servicios = filteredNameList.get(position);
+
+                    Intent i = new Intent(context, DetalleHistorial.class);
+                    context.startActivity(i);
+                }
+
+
+
             }
         });
 
@@ -150,6 +204,7 @@ public class ServicioAdapter2 extends RecyclerView.Adapter<ServicioAdapter2.Serv
     @Override
     public void getServicio() {
 
+
     }
 
     @Override
@@ -166,7 +221,7 @@ public class ServicioAdapter2 extends RecyclerView.Adapter<ServicioAdapter2.Serv
     public void actualizarFavorito() {
 
 
-        comandoSercicio.getListServicio();
+
     }
 
     class ServicioViewHolder extends RecyclerView.ViewHolder {
@@ -175,6 +230,7 @@ public class ServicioAdapter2 extends RecyclerView.Adapter<ServicioAdapter2.Serv
         private TextView text_dir;
         private TextView text_nombre;
         private TextView text_fecha;
+        private TextView txt_estado;
         private LinearLayout layuotdata;
         private Button btnaceptservice;
 
@@ -184,6 +240,7 @@ public class ServicioAdapter2 extends RecyclerView.Adapter<ServicioAdapter2.Serv
             text_dir = itemView.findViewById(R.id.text_dir);
             text_nombre = itemView.findViewById(R.id.text_nombre);
             text_fecha = itemView.findViewById(R.id.text_fecha);
+            txt_estado = itemView.findViewById(R.id.txt_estado);
             layuotdata = itemView.findViewById(R.id.layuotdata);
             btnaceptservice = itemView.findViewById(R.id.btnaceptservice);
         }

@@ -9,6 +9,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -48,6 +49,7 @@ import com.enfermeraya.enfermerayaclient.adapter.ServicioAdapter2;
 import com.enfermeraya.enfermerayaclient.app.Modelo;
 import com.enfermeraya.enfermerayaclient.clases.Servicios;
 import com.enfermeraya.enfermerayaclient.comandos.ComandoSercicio;
+import com.enfermeraya.enfermerayaclient.comandos.ComandoService;
 import com.enfermeraya.enfermerayaclient.models.utility.Utility;
 import com.enfermeraya.enfermerayaclient.notificacion.Token;
 import com.enfermeraya.enfermerayaclient.views.MainActivity;
@@ -83,10 +85,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 
-public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicioChangeListener,OnMapReadyCallback,TimePickerDialog.OnTimeSetListener, android.app.TimePickerDialog.OnTimeSetListener {
+public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicioChangeListener,
+        OnMapReadyCallback,TimePickerDialog.OnTimeSetListener,
+        android.app.TimePickerDialog.OnTimeSetListener {
 
     private HomeViewModel homeViewModel;
     Modelo modelo = Modelo.getInstance();
@@ -140,8 +145,8 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
 
         modelo.vistaservice = 0;
         utility = new Utility();
+        getPreference();
         comandoSercicio = new ComandoSercicio(this);
-
         if (utility.estado(getActivity())) {
             comandoSercicio.getListServicio();
             mapa();
@@ -187,6 +192,8 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
                             hideDialog();
                             dialog.dismiss();
                             modelo.estado = 1;
+                            setPreference(modelo.estado);
+                            stado();
                         }
                     });
 
@@ -214,6 +221,7 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
                     listservice.setVisibility(View.GONE);
                     btn_estado.setText("DISPONIBLE");
                     modelo.estado = 0;
+                    setPreference(modelo.estado);
 
                 }
 
@@ -508,7 +516,6 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
             loc.getLatitude();
             loc.getLongitude();
 
-
             modelo.latitud = loc.getLatitude();
             modelo.longitud = loc.getLongitude();
 
@@ -670,9 +677,6 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
             btn_estado.setVisibility(View.GONE);
 
             modelo.tiempo = time;
-
-
-
                /* Log.v("Diferencia", horaresta+"-"+minresta);
                 if(totalmin > 1){
                     Toast.makeText(getActivity(),"se activara en: " + totalmin+ " minutos", Toast.LENGTH_LONG).show();
@@ -684,16 +688,18 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
             tiemoService = new Tiempo(getActivity(), time);
             tiemoService.timerTiempo();
             modelo.estado = 2;
-
-               /* new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        //visible();
-                    }
-                },(time *1000)*100);*/
+            setPreference(modelo.estado);
 
 
-            // startAlarm(false, false, time);
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    // acciones que se ejecutan tras los milisegundos
+                    modelo.estado = 1;
+                    setPreference(modelo.estado);
+                  stado();
+                }
+            }, (time*60)*100);
         }
 
 
@@ -769,18 +775,23 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
 
     public void stado() {
 
+        //1 = activo
         if (modelo.estado == 1) {
+            relativeopaciti.setVisibility(View.GONE);
             layoutvacio.setVisibility(View.GONE);
             layoutmap.setVisibility(View.VISIBLE);
             listservice.setVisibility(View.VISIBLE);
             btn_estado.setText("DESCONECTAR");
-        } else if (modelo.estado == 2) {
+            recyclerView.setVisibility(View.VISIBLE);
+            btn_estado.setVisibility(View.VISIBLE);
+        } else if (modelo.estado == 2) {//2 = posponer
             relativeopaciti.setVisibility(View.VISIBLE);
             layoutmap.setVisibility(View.VISIBLE);
             listservice.setVisibility(View.VISIBLE);
             layoutvacio.setVisibility(View.GONE);
             btn_estado.setVisibility(View.GONE);
-        } else {
+            recyclerView.setVisibility(View.GONE);
+        } else {//3 = inactico
             Toast.makeText(getActivity(), "Estado inactivo", Toast.LENGTH_LONG).show();
         }
 
@@ -792,6 +803,18 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
         Token token= new Token(refreshToken);
         comandoSercicio.updateToken(refreshToken);
         //FirebaseDatabase.getInstance().getReference("cliente/"+modelo.uid+"/tokem").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(token);
+    }
+
+
+    public void getPreference(){
+        SharedPreferences prefs = getActivity().getSharedPreferences("stadoactivo", MODE_PRIVATE);
+        modelo.estado = prefs.getInt("estadoActivo", 0);//"No name defined" is the default value.
+    }
+
+    public void setPreference(int estadoActivo){
+        SharedPreferences.Editor editor = getActivity().getSharedPreferences("stadoactivo", MODE_PRIVATE).edit();
+        editor.putInt("estadoActivo", estadoActivo);
+        editor.apply();
     }
 
 }

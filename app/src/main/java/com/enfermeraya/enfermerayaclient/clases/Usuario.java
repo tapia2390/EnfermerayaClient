@@ -13,10 +13,11 @@ public class Usuario {
     private  String direccion;
     private  double latitud;
     private  double longitud;
+    private  boolean estado;
 
     public Usuario(){}
 
-    public Usuario(String key, String nombre, String apellido, String celular, String correo, String pasString, String foto, String token, String direccion, double latitud, double longitud) {
+    public Usuario(String key, String nombre, String apellido, String celular, String correo, String pasString, String foto, String token, String direccion, double latitud, double longitud, boolean estado) {
         this.key = key;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -28,6 +29,7 @@ public class Usuario {
         this.direccion = direccion;
         this.latitud = latitud;
         this.longitud = longitud;
+        this.estado = estado;
     }
 
     public String getKey() {
@@ -116,5 +118,13 @@ public class Usuario {
 
     public void setLongitud(double longitud) {
         this.longitud = longitud;
+    }
+
+    public boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 }

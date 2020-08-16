@@ -208,6 +208,10 @@ public class ComandoSercicio {
                 ser.setEstado(snFav.child("estado").getValue().toString());
                 ser.setUid(snFav.child("uid").getValue().toString());
                 ser.setToken(snFav.child("token").getValue().toString());
+               if(snFav.child("foto").exists()){
+                   ser.setFoto(snFav.child("foto").getValue().toString());
+               }
+
                 modelo.listServicios.add(ser);
 
                 mListener.getServicio();
@@ -295,6 +299,21 @@ public class ComandoSercicio {
 
         final DatabaseReference ref2 = database.getReference("cliente/"+modelo.uid+"/servicios/"+key+ "/titulo/");//ruta path
         ref2.setValue(titulo);
+
+        mListener.actualizarFavorito();
+
+
+    }
+
+    public void servicoAceptadouidCliente(String uidCliente, String idServicio, String stado){
+
+        final DatabaseReference ref = database.getReference("servicioclientes/"+idServicio+ "/uidCliente/");//ruta path
+        ref.setValue(uidCliente);
+
+        final DatabaseReference ref2 = database.getReference("servicioclientes/"+idServicio+ "/estado/");//ruta path
+        ref2.setValue(stado);
+
+
 
         mListener.actualizarFavorito();
 

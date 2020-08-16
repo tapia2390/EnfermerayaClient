@@ -1,6 +1,6 @@
 package com.enfermeraya.enfermerayaclient.clases;
 
-public class Servicios {
+public class Historial {
     String key;
     String nombre;
     String tipoServicio;
@@ -16,14 +16,18 @@ public class Servicios {
     String estado;
     long timestamp;
     String horaServicio;
+    String uidCliente;
+    double calificaion;
+    String observacionesEnfermero;
+    String medicamentosAsignados;
     String uid;
     String token;
     String foto;
 
 
-    public Servicios(){}
+    public Historial(){}
 
-    public Servicios(String key, String nombre, String tipoServicio, String fecha, String horaInicio, String horaFin, String informacion, String obsciones, String direccion, double latitud, double longitud, String titulo, String estado, long timestamp, String horaServicio, String uid, String token, String foto) {
+    public Historial(String key, String nombre, String tipoServicio, String fecha, String horaInicio, String horaFin, String informacion, String obsciones, String direccion, double latitud, double longitud, String titulo, String estado, long timestamp, String horaServicio, String uidCliente, double calificaion, String observacionesEnfermero, String medicamentosAsignados, String uid, String token, String foto) {
         this.key = key;
         this.nombre = nombre;
         this.tipoServicio = tipoServicio;
@@ -39,10 +43,13 @@ public class Servicios {
         this.estado = estado;
         this.timestamp = timestamp;
         this.horaServicio = horaServicio;
+        this.uidCliente = uidCliente;
+        this.calificaion = calificaion;
+        this.observacionesEnfermero = observacionesEnfermero;
+        this.medicamentosAsignados = medicamentosAsignados;
         this.uid = uid;
         this.token = token;
         this.foto =  foto;
-
     }
 
     public String getKey() {
@@ -51,54 +58,6 @@ public class Servicios {
 
     public void setKey(String key) {
         this.key = key;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public double getLatitud() {
-        return latitud;
-    }
-
-    public void setLatitud(double latitud) {
-        this.latitud = latitud;
-    }
-
-    public double getLongitud() {
-        return longitud;
-    }
-
-    public void setLongitud(double longitud) {
-        this.longitud = longitud;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public long getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
     }
 
     public String getNombre() {
@@ -157,12 +116,92 @@ public class Servicios {
         this.obsciones = obsciones;
     }
 
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public double getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(double latitud) {
+        this.latitud = latitud;
+    }
+
+    public double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(double longitud) {
+        this.longitud = longitud;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
     public String getHoraServicio() {
         return horaServicio;
     }
 
     public void setHoraServicio(String horaServicio) {
         this.horaServicio = horaServicio;
+    }
+
+    public String getUidCliente() {
+        return uidCliente;
+    }
+
+    public void setUidCliente(String uidCliente) {
+        this.uidCliente = uidCliente;
+    }
+
+    public double getCalificaion() {
+        return calificaion;
+    }
+
+    public void setCalificaion(double calificaion) {
+        this.calificaion = calificaion;
+    }
+
+    public String getObservacionesEnfermero() {
+        return observacionesEnfermero;
+    }
+
+    public void setObservacionesEnfermero(String observacionesEnfermero) {
+        this.observacionesEnfermero = observacionesEnfermero;
+    }
+
+    public String getMedicamentosAsignados() {
+        return medicamentosAsignados;
+    }
+
+    public void setMedicamentosAsignados(String medicamentosAsignados) {
+        this.medicamentosAsignados = medicamentosAsignados;
     }
 
 

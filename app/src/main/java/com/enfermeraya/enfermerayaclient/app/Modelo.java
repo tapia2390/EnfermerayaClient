@@ -3,6 +3,7 @@ package com.enfermeraya.enfermerayaclient.app;
 
 import com.enfermeraya.enfermerayaclient.clases.ClassTerminosYCondiciones;
 import com.enfermeraya.enfermerayaclient.clases.Favoritos;
+import com.enfermeraya.enfermerayaclient.clases.Historial;
 import com.enfermeraya.enfermerayaclient.clases.Servicios;
 import com.enfermeraya.enfermerayaclient.clases.TipoServicio;
 import com.enfermeraya.enfermerayaclient.clases.Usuario;
@@ -25,6 +26,7 @@ public class Modelo {
     public long tiempo = 5000;
     public int estado = 0;
     public int vistaservice = 0;
+    public String estadoActivo;
 
     public static Modelo getInstance() {
         return ourInstance;
@@ -38,8 +40,10 @@ public class Modelo {
     public ArrayList<Favoritos> listFavoritos = new ArrayList<Favoritos>();
     public ArrayList<Servicios> listServicios = new ArrayList<Servicios>();
     public ArrayList<TipoServicio> listTipoServicios = new ArrayList<TipoServicio>();
+    public ArrayList<Historial> listHistorial = new ArrayList<Historial>();
     public  Favoritos favoritos = new Favoritos();
     public Servicios servicios =  new Servicios();
+    public Historial historial =  new Historial();
 
     public Usuario usuario = new Usuario();
     public String tipoLogin = "";

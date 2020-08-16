@@ -100,7 +100,8 @@ public class ComandoPerfil {
                 modelo.usuario.setFoto(snap.child("foto").getValue().toString());
                 modelo.usuario.setToken(snap.child("tokem").getValue().toString());
 
-
+                boolean  estado = (boolean) snap.child("estado").getValue();
+                modelo.usuario.setEstado(estado);
                 mListener.cargoUSuario();
             }
 
@@ -115,6 +116,29 @@ public class ComandoPerfil {
 
     }
 
+
+    public void getPaciente(String uid){
+
+        DatabaseReference ref = database.getReference("usuario/" + uid);//ruta path
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snap) {
+
+                modelo.servicios.setNombre(snap.child("nombre").getValue().toString() + " "+snap.child("apellido").getValue().toString());
+
+                mListener.cargoUSuario();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.v("Error :X",""+databaseError.getMessage());
+
+                mListener.setUsuarioListener();
+            }
+        });
+
+
+    }
 
 
 

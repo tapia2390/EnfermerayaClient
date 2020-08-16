@@ -83,16 +83,10 @@ public class Registrarse extends Activity implements ComandoValidarCorreoFirebas
     private static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1 ;
     ImageView camara1;
     TextView txt_camara1;
-
-    private ProgressDialog progressDialog;
     private static final String TAG ="AndroidBash";
     String foto ="";
-    Date date;
-    DateFormat hourFormat;
-    int setHora = 0;
 
-    private static String APP_DIRECTORY = "MyPictureApp/";
-    private static String MEDIA_DIRECTORY = APP_DIRECTORY + "PictureApp";
+
     private final int MY_PERMISSIONS = 123;
     private final int PHOTO_CODE = 3;
     private final int SELECT_PICTURE = 300;
@@ -101,7 +95,6 @@ public class Registrarse extends Activity implements ComandoValidarCorreoFirebas
     Uri photoURI = null;
     String ruta1 = null;
     static final int REQUEST_TAKE_PHOTO = 3;
-    String mCurrentPhotoPath = "";
 
     Utility utility;
     SweetAlertDialog pDialog;
@@ -510,7 +503,7 @@ public class Registrarse extends Activity implements ComandoValidarCorreoFirebas
         String foto = this.foto;
         String token = this.token;
 
-        usuario =  new Usuario("",nombre,apellido,celular,correo,password,foto,token,"",modelo.latitud,modelo.longitud);
+        usuario =  new Usuario("",nombre,apellido,celular,correo,password,foto,token,"",modelo.latitud,modelo.longitud,true);
 
         comandoValidarCorreoFirebase.registroUsuario(usuario);
     }

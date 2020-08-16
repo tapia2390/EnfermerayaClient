@@ -33,6 +33,12 @@
 
 
         <item
+            android:id="@+id/nav_mis_historial"
+            android:icon="@drawable/img_legal"
+            android:title="Historial" />
+
+
+        <item
             android:id="@+id/nav_pagos"
             android:icon="@drawable/img_legal"
             android:title="Pagos" />
