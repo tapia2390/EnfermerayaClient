@@ -185,6 +185,7 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
                         @Override
                         public void onClick(View view) {
 
+                            comandoSercicio.updateStado(true);
                             layoutvacio.setVisibility(View.GONE);
                             layoutmap.setVisibility(View.VISIBLE);
                             listservice.setVisibility(View.VISIBLE);
@@ -201,6 +202,7 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
                     btnmastarde.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            comandoSercicio.updateStado(true);
                             customTimePickerDialog();
                             hideDialog();
                             dialog.dismiss();
@@ -222,6 +224,8 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
                     btn_estado.setText("DISPONIBLE");
                     modelo.estado = 0;
                     setPreference(modelo.estado);
+                    comandoSercicio.updateStado(true);
+                    comandoSercicio.updateStado(false);
 
                 }
 

@@ -164,6 +164,15 @@ public class ComandoHistorial {
                 double lattitud = (double)snFav.child("latitud").getValue();
                 double longitud = (double)snFav.child("longitud").getValue();
 
+                if(snFav.child("calificacion").exists()){
+                    double calificacion = (double)snFav.child("calificacion").getValue();
+                    ser.setCalificaion(calificacion);
+
+                }else{
+                    ser.setCalificaion(0.0);
+
+                }
+
                 ser.setLatitud(lattitud);
                 ser.setLongitud(longitud);
 

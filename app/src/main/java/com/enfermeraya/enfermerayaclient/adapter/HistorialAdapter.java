@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -51,11 +52,18 @@ public class HistorialAdapter extends RecyclerView.Adapter<HistorialAdapter.Hist
         String nombre = filteredNameList.get(position).getNombre();
         String direccion = filteredNameList.get(position).getDireccion();
         String estado = filteredNameList.get(position).getEstado();
+        double calificacion = filteredNameList.get(position).getCalificaion();
 
         holder.txtfecha.setText(fecha);
         holder.txtservicio.setText(servicio);
         holder.txtnombre.setText(nombre);
         holder.txtdireccion.setText(direccion);
+
+        if(calificacion != 0){
+            holder.txt_pendiente.setVisibility(View.GONE);
+            holder.layoutcalificacion.setVisibility(View.VISIBLE);
+            holder.txt_calificacion.setText(""+calificacion);
+        }
 
         holder.btnestado.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,6 +131,10 @@ public class HistorialAdapter extends RecyclerView.Adapter<HistorialAdapter.Hist
         private TextView txtnombre;
         private TextView txtdireccion;
         private Button btnestado;
+        private Button txt_pendiente;
+        private LinearLayout layoutcalificacion;
+        private TextView txt_calificacion;
+
 
         HistorialViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -131,6 +143,9 @@ public class HistorialAdapter extends RecyclerView.Adapter<HistorialAdapter.Hist
             txtnombre = itemView.findViewById(R.id.txtnombre);
             txtdireccion = itemView.findViewById(R.id.txtdireccion);
             btnestado = itemView.findViewById(R.id.btnestado);
+            txt_pendiente = itemView.findViewById(R.id.txt_pendiente);
+            layoutcalificacion = itemView.findViewById(R.id.layoutcalificacion);
+            txt_calificacion = itemView.findViewById(R.id.txt_calificacion);
 
         }
     }

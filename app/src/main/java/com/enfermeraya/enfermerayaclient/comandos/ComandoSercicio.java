@@ -305,6 +305,17 @@ public class ComandoSercicio {
 
     }
 
+    public void updateStado(boolean estado){
+
+        final DatabaseReference ref = database.getReference("cliente/"+modelo.uid+"/estado/");//ruta path
+        ref.setValue(estado);
+
+        mListener.actualizarFavorito();
+
+
+    }
+
+
     public void servicoAceptadouidCliente(String uidCliente, String idServicio, String stado){
 
         final DatabaseReference ref = database.getReference("servicioclientes/"+idServicio+ "/uidCliente/");//ruta path

@@ -97,9 +97,9 @@ public class ServicioAdapter2 extends RecyclerView.Adapter<ServicioAdapter2.Serv
                 holder.btnaceptservice.setVisibility(View.VISIBLE);
                 holder.txt_estado.setVisibility(View.GONE);
             }else{
-                holder.btnaceptservice.setVisibility(View.GONE);
+                holder.btnaceptservice.setVisibility(View.VISIBLE);
                 holder.txt_estado.setText("Detalle");
-                holder.txt_estado.setVisibility(View.VISIBLE);
+                holder.txt_estado.setVisibility(View.GONE);
             }
 
         }
