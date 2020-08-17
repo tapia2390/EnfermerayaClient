@@ -165,13 +165,23 @@ public class ComandoHistorial {
                 double longitud = (double)snFav.child("longitud").getValue();
 
                 if(snFav.child("calificacion").exists()){
-                    double calificacion = (double)snFav.child("calificacion").getValue();
+                    
+                    double calificacion =0.0;
+
+                    try {
+                        calificacion = (double)snFav.child("calificacion").getValue();
+                    }catch (Exception  ex){
+                        calificacion = Double.parseDouble(snFav.child("calificacion").getValue().toString());
+                    }
                     ser.setCalificaion(calificacion);
 
                 }else{
                     ser.setCalificaion(0.0);
 
                 }
+
+
+
 
                 ser.setLatitud(lattitud);
                 ser.setLongitud(longitud);
