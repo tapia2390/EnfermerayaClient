@@ -165,9 +165,8 @@ public class ComandoHistorial {
                 double longitud = (double)snFav.child("longitud").getValue();
 
                 if(snFav.child("calificacion").exists()){
-                    
-                    double calificacion =0.0;
 
+                    double calificacion =0.0;
                     try {
                         calificacion = (double)snFav.child("calificacion").getValue();
                     }catch (Exception  ex){
