@@ -212,6 +212,19 @@ public class ComandoSercicio {
                    ser.setFoto(snFav.child("foto").getValue().toString());
                }
 
+                if(snFav.child("nombreEnfermero").exists()){
+                    ser.setNameEmfermero(snFav.child("nombreEnfermero").getValue().toString());
+                }else{
+                    ser.setNameEmfermero("");
+                }
+
+                if(snFav.child("nombreCliente").exists()){
+                    ser.setNameCliente(snFav.child("nombreCliente").getValue().toString());
+                }else{
+                    ser.setNameCliente("");
+                }
+
+
                 modelo.listServicios.add(ser);
 
                 mListener.getServicio();
@@ -324,6 +337,9 @@ public class ComandoSercicio {
         final DatabaseReference ref2 = database.getReference("servicioclientes/"+idServicio+ "/estado/");//ruta path
         ref2.setValue(stado);
 
+
+        final DatabaseReference ref3 = database.getReference("servicioclientes/"+idServicio+ "/nombreEnfermero/");//ruta path
+        ref3.setValue(modelo.usuario.getNombre());
 
 
         mListener.actualizarFavorito();

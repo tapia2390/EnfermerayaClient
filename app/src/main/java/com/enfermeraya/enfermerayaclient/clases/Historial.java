@@ -23,11 +23,14 @@ public class Historial {
     String uid;
     String token;
     String foto;
+    String nameCliente;
+    String nameEmfermero;
+
 
 
     public Historial(){}
 
-    public Historial(String key, String nombre, String tipoServicio, String fecha, String horaInicio, String horaFin, String informacion, String obsciones, String direccion, double latitud, double longitud, String titulo, String estado, long timestamp, String horaServicio, String uidCliente, double calificaion, String observacionesEnfermero, String medicamentosAsignados, String uid, String token, String foto) {
+    public Historial(String key, String nombre, String tipoServicio, String fecha, String horaInicio, String horaFin, String informacion, String obsciones, String direccion, double latitud, double longitud, String titulo, String estado, long timestamp, String horaServicio, String uidCliente, double calificaion, String observacionesEnfermero, String medicamentosAsignados, String uid, String token, String foto, String nameCliente, String nameEmfermero) {
         this.key = key;
         this.nombre = nombre;
         this.tipoServicio = tipoServicio;
@@ -50,6 +53,8 @@ public class Historial {
         this.uid = uid;
         this.token = token;
         this.foto =  foto;
+        this.nameCliente = nameCliente;
+        this.nameEmfermero = nameEmfermero;
     }
 
     public String getKey() {
@@ -227,5 +232,21 @@ public class Historial {
 
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    public String getNameCliente() {
+        return nameCliente;
+    }
+
+    public void setNameCliente(String nameCliente) {
+        this.nameCliente = nameCliente;
+    }
+
+    public String getNameEmfermero() {
+        return nameEmfermero;
+    }
+
+    public void setNameEmfermero(String nameEmfermero) {
+        this.nameEmfermero = nameEmfermero;
     }
 }

@@ -19,11 +19,13 @@ public class Servicios {
     String uid;
     String token;
     String foto;
+    String nameCliente;
+    String nameEmfermero;
 
 
     public Servicios(){}
 
-    public Servicios(String key, String nombre, String tipoServicio, String fecha, String horaInicio, String horaFin, String informacion, String obsciones, String direccion, double latitud, double longitud, String titulo, String estado, long timestamp, String horaServicio, String uid, String token, String foto) {
+    public Servicios(String key, String nombre, String tipoServicio, String fecha, String horaInicio, String horaFin, String informacion, String obsciones, String direccion, double latitud, double longitud, String titulo, String estado, long timestamp, String horaServicio, String uid, String token, String foto,String nameCliente, String nameEmfermero) {
         this.key = key;
         this.nombre = nombre;
         this.tipoServicio = tipoServicio;
@@ -42,6 +44,8 @@ public class Servicios {
         this.uid = uid;
         this.token = token;
         this.foto =  foto;
+        this.nameCliente = nameCliente;
+        this.nameEmfermero = nameEmfermero;
 
     }
 
@@ -188,5 +192,21 @@ public class Servicios {
 
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    public String getNameCliente() {
+        return nameCliente;
+    }
+
+    public void setNameCliente(String nameCliente) {
+        this.nameCliente = nameCliente;
+    }
+
+    public String getNameEmfermero() {
+        return nameEmfermero;
+    }
+
+    public void setNameEmfermero(String nameEmfermero) {
+        this.nameEmfermero = nameEmfermero;
     }
 }

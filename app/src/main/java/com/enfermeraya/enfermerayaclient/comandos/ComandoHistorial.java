@@ -192,6 +192,19 @@ public class ComandoHistorial {
                 ser.setObservacionesEnfermero(snFav.child("observacionesEnfermero").getValue().toString());
                 ser.setMedicamentosAsignados(snFav.child("medicamentosAsignados").getValue().toString());
                 ser.setFoto(snFav.child("foto").getValue().toString());
+
+                if(snFav.child("nombreEnfermero").exists()){
+                    ser.setNameEmfermero(snFav.child("nombreEnfermero").getValue().toString());
+                }else{
+                    ser.setNameEmfermero("");
+                }
+
+                if(snFav.child("nombreCliente").exists()){
+                    ser.setNameCliente(snFav.child("nombreCliente").getValue().toString());
+                }else{
+                    ser.setNameCliente("");
+                }
+
                 modelo.listHistorial.add(ser);
 
                 mListener.okHistorial();

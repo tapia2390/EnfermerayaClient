@@ -22,6 +22,8 @@ import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.Random;
 
+
+
 public class Fcm extends FirebaseMessagingService {
 
     Modelo modelo = Modelo.getInstance();
@@ -50,19 +52,25 @@ public class Fcm extends FirebaseMessagingService {
         }
 
         if (remoteMessage.getData().size() > 0){
-            Log.v("TAG","El titulo es:"+ remoteMessage.getData().get("titulo"));
-            Log.v("TAG","El Detalle es:"+ remoteMessage.getData().get("detalle"));
+
+
+            String datamsms = remoteMessage.getFrom()+"\n"+
+                    remoteMessage.getTo()+"\n"+
+                    remoteMessage.getData()+"\n";
+
+            Log.v("TAG","El titulo es:"+ remoteMessage.getData().get("Title"));
+            Log.v("TAG","El Detalle es:"+ remoteMessage.getData().get("Message"));
             Log.v("TAG","El Color es:"+ remoteMessage.getData().get("color"));
 
-            String titulo = remoteMessage.getData().get("titulo");
-            String detail = remoteMessage.getData().get("detalle");
+            String titulo = remoteMessage.getData().get("Title");
+            String detail = remoteMessage.getData().get("Message");
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
                 notificacion(titulo,detail);
             }
 
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O){
-               // notificacion2();
+                // notificacion2();
                 notificacion(titulo,detail);
             }
 
@@ -70,7 +78,7 @@ public class Fcm extends FirebaseMessagingService {
     }
 
     private void notificacion2() {
-       // notificacion2();
+        // notificacion2();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

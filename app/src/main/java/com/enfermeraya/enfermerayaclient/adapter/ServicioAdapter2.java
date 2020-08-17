@@ -132,7 +132,6 @@ public class ServicioAdapter2 extends RecyclerView.Adapter<ServicioAdapter2.Serv
                     holder.txt_estado.setVisibility(View.VISIBLE);*/
                     filteredNameList.get(position).setEstado("Aceptado");
                     modelo.servicios = filteredNameList.get(position);
-
                     Intent i = new Intent(context, DetalleHistorial.class);
                     context.startActivity(i);
                 }

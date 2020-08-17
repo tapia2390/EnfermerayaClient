@@ -137,7 +137,7 @@ public class DetalleHistorial extends Activity implements ComandoPerfil.OnPerfil
                 historial =  modelo.historial;
                 txtfecha.setText(modelo.historial.getFecha());
                 txtservicio.setText(modelo.historial.getTipoServicio());
-                txtnombre.setText(modelo.historial.getNombre());
+                txtnombre.setText(modelo.historial.getNameCliente());
                 text_medical_center.setText(modelo.historial.getDireccion());
                 btnestado.setText(modelo.historial.getEstado());
                 observacionesenferm.setText(modelo.historial.getObservacionesEnfermero());
@@ -157,7 +157,7 @@ public class DetalleHistorial extends Activity implements ComandoPerfil.OnPerfil
                 servicios =  modelo.servicios;
                 txtfecha.setText(modelo.servicios.getFecha());
                 txtservicio.setText(modelo.servicios.getTipoServicio());
-                txtnombre.setText(modelo.servicios.getNombre());
+                txtnombre.setText(modelo.servicios.getNameCliente());
                 text_medical_center.setText(modelo.servicios.getDireccion());
                 btnestado.setText(modelo.servicios.getEstado());
                 btntitulo.setText("Detalle Servicio");
