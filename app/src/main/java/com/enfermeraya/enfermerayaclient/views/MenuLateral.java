@@ -87,7 +87,7 @@ public class MenuLateral extends AppCompatActivity  implements ComandoPerfil.OnP
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_mi_cuenta, R.id.nav_mis_servicios,  R.id.nav_pagos, R.id.nav_recomienda, R.id.nav_ayuda)
+                R.id.nav_home, R.id.nav_mi_cuenta, R.id.nav_mis_servicios,  R.id.nav_historial, R.id.nav_recomienda, R.id.nav_ayuda)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);

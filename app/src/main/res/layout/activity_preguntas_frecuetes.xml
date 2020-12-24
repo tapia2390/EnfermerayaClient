@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/degradado">
+
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      tools:ignore="MissingConstraints"
+      android:paddingTop="20sp">
+
+
+    <com.enfermeraya.enfermerayaclient.customfonts.MyTextView_Poppins_SemiBold
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10.3dp"
+        android:gravity="center_horizontal"
+        android:text="Preguntas frecuentes"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlanco"
+        android:textSize="20sp" />
+
+  </LinearLayout>
+
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:orientation="horizontal"
+            android:paddingLeft="14.5dp"
+            tools:ignore="MissingConstraints">
+
+          <View
+              android:layout_width="5.6dp"
+              android:layout_height="125dp"
+              android:background="#FFF" />
+
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="13dp"
+              android:layout_marginRight="10dp"
+              android:background="@drawable/rectangle">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="19dp"
+                android:orientation="vertical">
+
+
+              <com.enfermeraya.enfermerayaclient.customfonts.MyTextView_Poppins_SemiBold
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="10.3dp"
+                  android:gravity="center_horizontal"
+                  android:text="¿Qué es enfermeraya?"
+                  android:textColor="#333232"
+                  android:textSize="16.7sp" />
+
+
+              <com.enfermeraya.enfermerayaclient.customfonts.MyTextView_Poppins_Regular
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="10dp"
+                  android:text="Es una aplicación para solicitar servicios medicos a profecionales"
+                  android:textSize="12.3sp" />
+
+
+
+              <View
+                  android:layout_width="match_parent"
+                  android:layout_height="1dp"
+                  android:layout_marginTop="45sp"
+                  android:background="#9e9e9e" />
+
+            </LinearLayout>
+          </LinearLayout>
+        </LinearLayout>
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:orientation="horizontal"
+            android:paddingLeft="14.5dp"
+            tools:ignore="MissingConstraints">
+
+          <View
+              android:layout_width="5.6dp"
+              android:layout_height="125dp"
+              android:background="#FFF" />
+
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="13dp"
+              android:layout_marginRight="10dp"
+              android:background="@drawable/rectangle">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="19dp"
+                android:orientation="vertical">
+
+
+              <com.enfermeraya.enfermerayaclient.customfonts.MyTextView_Poppins_SemiBold
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="10.3dp"
+                  android:gravity="center_horizontal"
+                  android:text="¿Cómo Funciona?"
+                  android:textColor="#333232"
+                  android:textSize="16.7sp" />
+
+
+              <com.enfermeraya.enfermerayaclient.customfonts.MyTextView_Poppins_Regular
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="10dp"
+                  android:text="Enfermeraya nos permiste solicitar solicitar servicios para los usuarios y sus familiares, en los cuales les ayudan con el vienestar de su salud."
+                  android:textSize="12.3sp" />
+
+
+
+              <View
+                  android:layout_width="match_parent"
+                  android:layout_height="1dp"
+                  android:layout_marginTop="45sp"
+                  android:background="#9e9e9e" />
+
+            </LinearLayout>
+          </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:orientation="horizontal"
+            android:paddingLeft="14.5dp"
+            tools:ignore="MissingConstraints">
+
+          <View
+              android:layout_width="5.6dp"
+              android:layout_height="125dp"
+              android:background="#FFF" />
+
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="13dp"
+              android:layout_marginRight="10dp"
+              android:background="@drawable/rectangle">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="19dp"
+                android:orientation="vertical">
+
+
+              <com.enfermeraya.enfermerayaclient.customfonts.MyTextView_Poppins_SemiBold
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="10.3dp"
+                  android:gravity="center_horizontal"
+                  android:text="¿Qué servicios prestan?"
+                  android:textColor="#333232"
+                  android:textSize="16.7sp" />
+
+
+              <com.enfermeraya.enfermerayaclient.customfonts.MyTextView_Poppins_Regular
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="10dp"
+                  android:text="Los servicios que se prestan son: \n * Inyectables \n * Medida de Presión \n * Cuidados a persona enfermas \n "
+                  android:textSize="12.3sp" />
+
+
+
+              <View
+                  android:layout_width="match_parent"
+                  android:layout_height="1dp"
+                  android:layout_marginTop="45sp"
+                  android:background="#9e9e9e" />
+
+            </LinearLayout>
+          </LinearLayout>
+        </LinearLayout>
+
+
+
+
+
+      </LinearLayout>
+
+
+    </ScrollView>
+  </LinearLayout>
+
+
+</LinearLayout>

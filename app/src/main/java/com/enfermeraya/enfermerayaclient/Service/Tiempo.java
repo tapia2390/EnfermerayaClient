@@ -56,7 +56,7 @@ public class Tiempo extends Service {
 
 
     public void timerTiempo() {
-        Toast.makeText(activity," timer",Toast.LENGTH_LONG).show();
+       // Toast.makeText(activity," timer",Toast.LENGTH_LONG).show();
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
@@ -65,7 +65,7 @@ public class Tiempo extends Service {
                 modelo.estado = 1;
                 setPreference(modelo.estado);
             }
-        }, (time*60)*100);
+        }, (time*60)*1000);
     }
 
 

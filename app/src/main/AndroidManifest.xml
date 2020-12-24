@@ -45,15 +45,18 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-
-        <activity android:name=".views.DetalleHistorial"
+        <activity android:name=".views.InfoApp"></activity>
+        <activity android:name=".views.Contactanos" />
+        <activity android:name=".views.PreguntasFrecuetes" />
+        <activity
+            android:name=".views.DetalleHistorial"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"
-            tools:ignore="LockedOrientationActivity"></activity>
-
+            tools:ignore="LockedOrientationActivity" />
         <activity android:name=".views.Teminos" />
         <activity android:name=".views.OlvidoSuPassword" />
-        <activity android:name=".views.Registrarse"
+        <activity
+            android:name=".views.Registrarse"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"
             tools:ignore="LockedOrientationActivity" />

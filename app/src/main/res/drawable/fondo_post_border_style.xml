@@ -8,7 +8,7 @@
 
         <shape>
         <gradient android:angle="0" android:endColor="@color/colorPrimaryDark" android:startColor="@color/colorPrimaryDark" android:centerColor="@color/colorPrimaryDark" android:gradientRadius="10sp" />
-        <corners android:radius="5dp" />
+        <corners android:radius="15dp" />
             <stroke android:width="0.5dp"
                 android:color="@color/colorPrimaryDark"/>
     </shape></item>

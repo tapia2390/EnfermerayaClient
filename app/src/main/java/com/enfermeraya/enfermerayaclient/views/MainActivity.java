@@ -26,6 +26,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -79,7 +80,7 @@ public class MainActivity extends Activity implements ComandoValidarUsuario.OnVa
 
 
     //gmail
-    private SignInButton signInButton;
+    private ImageView signInButton;
     private GoogleSignInClient mGoogleSignInClient;
     private  String TAG = "MainActivity";
     private int RC_SIGN_IN = 1;
@@ -126,7 +127,7 @@ public class MainActivity extends Activity implements ComandoValidarUsuario.OnVa
         mAuth = FirebaseAuth.getInstance();
 
         // gogole
-        signInButton = (SignInButton) findViewById(R.id.login_gmail);
+        signInButton = (ImageView) findViewById(R.id.login_gmail);
         //facebook
         loginButtonFacebook = (LoginButton) findViewById(R.id.login_button);
 

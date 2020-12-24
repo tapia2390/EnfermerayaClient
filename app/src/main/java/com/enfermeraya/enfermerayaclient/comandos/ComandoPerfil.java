@@ -25,7 +25,7 @@ public class ComandoPerfil {
 
 
     //interface del listener de la actividad interesada
-    private OnPerfilChangeListener mListener;
+    private ComandoPerfil.OnPerfilChangeListener mListener;
 
     /**
      * Interfaz para avisar de eventos a los interesados
@@ -39,7 +39,7 @@ public class ComandoPerfil {
 
     }
 
-    public ComandoPerfil(OnPerfilChangeListener mListener){
+    public ComandoPerfil(ComandoPerfil.OnPerfilChangeListener mListener){
 
         this.mListener = mListener;
 
@@ -59,6 +59,7 @@ public class ComandoPerfil {
         enviarRegistroUsuario.put("nombre", u.getNombre());
         enviarRegistroUsuario.put("apellido", u.getApellido());
         enviarRegistroUsuario.put("celular", u.getCelular());
+        enviarRegistroUsuario.put("codigo", u.getCodigo());
 
         if(!u.getFoto().equals("")){
             enviarRegistroUsuario.put("foto", u.getFoto());
@@ -99,32 +100,20 @@ public class ComandoPerfil {
                 modelo.usuario.setCorreo(snap.child("correo").getValue().toString());
                 modelo.usuario.setFoto(snap.child("foto").getValue().toString());
                 modelo.usuario.setToken(snap.child("tokem").getValue().toString());
+                modelo.usuario.setCodigo(snap.child("codigo").getValue().toString());
 
-                boolean  estado = (boolean) snap.child("estado").getValue();
-                modelo.usuario.setEstado(estado);
-                mListener.cargoUSuario();
-            }
+                if(snap.child("idculqi").exists()){
+                    modelo.usuario.setIdculqi(snap.child("idculqi").getValue().toString());
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.v("Error :X",""+databaseError.getMessage());
+                }
 
-                mListener.setUsuarioListener();
-            }
-        });
+                double lattitud = (double)snap.child("lat").getValue();
+                double longitud = (double)snap.child("long").getValue();
 
-
-    }
+                modelo.usuario.setLatitud(lattitud);
+                modelo.usuario.setLongitud(longitud);
 
 
-    public void getPaciente(String uid){
-
-        DatabaseReference ref = database.getReference("usuario/" + uid);//ruta path
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snap) {
-
-                modelo.servicios.setNombre(snap.child("nombre").getValue().toString() + " "+snap.child("apellido").getValue().toString());
 
                 mListener.cargoUSuario();
             }
@@ -139,6 +128,7 @@ public class ComandoPerfil {
 
 
     }
+
 
 
 
@@ -146,7 +136,7 @@ public class ComandoPerfil {
     /**
      * Para evitar nullpointerExeptions
      */
-    private static OnPerfilChangeListener sDummyCallbacks = new OnPerfilChangeListener()
+    private static ComandoPerfil.OnPerfilChangeListener sDummyCallbacks = new ComandoPerfil.OnPerfilChangeListener()
     {
 
         @Override

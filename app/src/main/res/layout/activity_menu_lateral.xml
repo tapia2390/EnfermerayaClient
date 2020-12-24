@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    tools:openDrawer="start"
+    android:background="@color/colorBlanco">
 
     <include
         layout="@layout/app_bar_menu_lateral"
@@ -19,6 +20,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+        android:background="@color/colorBlanco"
         app:menu="@menu/activity_menu_lateral_drawer" >
 
 
@@ -34,7 +36,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/nav_header_height"
-                android:background="@color/colorFondo"
+                android:background="@drawable/degradado"
                 android:gravity="left|center"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/activity_horizontal_margin"

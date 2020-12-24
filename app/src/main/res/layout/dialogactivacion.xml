@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/colorBlanco"
     android:layout_gravity="center"
-    android:gravity="center">
+    android:gravity="center"
+    app:cardCornerRadius="18dp">
 
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorBlanco"
+        android:layout_gravity="center"
+        android:gravity="center">
     <Button
         android:id="@+id/btnahora"
         android:layout_width="150sp"
@@ -19,8 +27,42 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="10sp"/>
+        android:layout_height="2sp"/>
 
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="85.6dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:background="#d2d2d2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text=" Ó "
+            android:textColor="@color/colorNegro"
+            android:textSize="13.3sp" />
+
+        <View
+            android:layout_width="85.6dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:background="#d2d2d2" />
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="2sp"/>
     <Button
         android:id="@+id/btnmastarde"
         android:layout_width="150sp"
@@ -29,6 +71,7 @@
         android:background="@color/colorBlanco"
         />
 
-
 </LinearLayout>
+
+</androidx.cardview.widget.CardView>
 

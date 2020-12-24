@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MisServicios.MisServiciosFragment">
+    tools:context=".ui.MisServicios.MisServiciosFragment"
+    android:background="@color/colorhueso">
 
 
     <LinearLayout

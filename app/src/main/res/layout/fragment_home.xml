@@ -19,7 +19,13 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              android:background="@color/colorGris">
+              android:layout_gravity="center"
+              android:gravity="center">
+              <ImageView
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:background="@drawable/fondomapa"
+                  android:scaleType="fitXY"/>
 
           </LinearLayout>
 
@@ -28,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="gone">
+            >
 
                 <fragment
                     android:id="@+id/map"
@@ -48,11 +54,11 @@
     <Button
         android:id="@+id/btn_estado"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30sp"
         android:text="DISPONIBLE"
         android:layout_alignParentBottom="true"
         android:textColor="@color/colorBlanco"
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/login_button_bk"
        android:layout_margin="50sp"/>
 
 

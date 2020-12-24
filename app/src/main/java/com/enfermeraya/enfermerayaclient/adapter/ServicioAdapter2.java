@@ -5,21 +5,19 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.enfermeraya.enfermerayaclient.R;
 import com.enfermeraya.enfermerayaclient.app.Modelo;
 import com.enfermeraya.enfermerayaclient.clases.Servicios;
@@ -30,8 +28,6 @@ import com.enfermeraya.enfermerayaclient.notificacion.Data;
 import com.enfermeraya.enfermerayaclient.notificacion.MyResponse;
 import com.enfermeraya.enfermerayaclient.notificacion.NotificationSender;
 import com.enfermeraya.enfermerayaclient.views.DetalleHistorial;
-import com.enfermeraya.enfermerayaclient.views.MainActivity;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,12 +35,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
 public class ServicioAdapter2 extends RecyclerView.Adapter<ServicioAdapter2.ServicioViewHolder> implements Filterable, ComandoSercicio.OnSercicioChangeListener {
 
     private Context context;
     private List<Servicios> nameList;
     private List<Servicios> filteredNameList;
     ComandoSercicio comandoSercicio;
+
     Modelo modelo = Modelo.getInstance();
 
     private APIService apiService;
@@ -56,6 +54,7 @@ public class ServicioAdapter2 extends RecyclerView.Adapter<ServicioAdapter2.Serv
         this.filteredNameList = nameList;
 
         comandoSercicio = new ComandoSercicio(this);
+
         apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
 
 
@@ -63,30 +62,34 @@ public class ServicioAdapter2 extends RecyclerView.Adapter<ServicioAdapter2.Serv
 
     @NonNull
     @Override
-    public ServicioViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ServicioAdapter2.ServicioViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.adapter_service, viewGroup, false);
-        return new ServicioViewHolder(view);
+        return new ServicioAdapter2.ServicioViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ServicioViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ServicioAdapter2.ServicioViewHolder holder, final int position) {
         String direccion = filteredNameList.get(position).getDireccion();
         String titlo = filteredNameList.get(position).getInformacion();
         String fecha = filteredNameList.get(position).getFecha();
+        String estado = filteredNameList.get(position).getEstado();
         holder.text_dir.setText(direccion);
         holder.text_nombre.setText(titlo);
         holder.text_fecha.setText(fecha);
+
+        //holder.text_estado.setText("Estado del servicio: " + estado);
+
 
         if(filteredNameList.get(position).getEstado().equals("false")){
 
             if(modelo.vistaservice ==0){
                 holder.btnaceptservice.setText("Aceptar");
                 holder.btnaceptservice.setVisibility(View.VISIBLE);
-                holder.txt_estado.setVisibility(View.GONE);
+                holder.text_estado.setVisibility(View.GONE);
             }else{
                 holder.btnaceptservice.setVisibility(View.GONE);
-                holder.txt_estado.setText("Pendiente");
-                holder.txt_estado.setVisibility(View.VISIBLE);
+                holder.text_estado.setText("Pendiente");
+                holder.text_estado.setVisibility(View.VISIBLE);
             }
 
         }
@@ -95,23 +98,23 @@ public class ServicioAdapter2 extends RecyclerView.Adapter<ServicioAdapter2.Serv
             if(modelo.vistaservice ==0){
                 holder.btnaceptservice.setText("Detalle");
                 holder.btnaceptservice.setVisibility(View.VISIBLE);
-                holder.txt_estado.setVisibility(View.GONE);
+                holder.text_estado.setVisibility(View.GONE);
             }else{
                 holder.btnaceptservice.setVisibility(View.VISIBLE);
-                holder.txt_estado.setText("Detalle");
-                holder.txt_estado.setVisibility(View.GONE);
+                holder.text_estado.setText("Detalle");
+                holder.text_estado.setVisibility(View.GONE);
             }
 
         }
         else if(filteredNameList.get(position).getEstado().equals("Terminado")){
             holder.btnaceptservice.setVisibility(View.GONE);
-            holder.txt_estado.setText("Terminado");
-            holder.txt_estado.setVisibility(View.VISIBLE);
+            holder.text_estado.setText("Terminado");
+            holder.text_estado.setVisibility(View.VISIBLE);
         }
         else{
             holder.btnaceptservice.setVisibility(View.GONE);
-            holder.txt_estado.setText("Finalizado");
-            holder.txt_estado.setVisibility(View.VISIBLE);
+            holder.text_estado.setText("Finalizado");
+            holder.text_estado.setVisibility(View.VISIBLE);
         }
 
         holder.btnaceptservice.setOnClickListener(new View.OnClickListener() {
@@ -119,10 +122,27 @@ public class ServicioAdapter2 extends RecyclerView.Adapter<ServicioAdapter2.Serv
             public void onClick(View view) {
 
                 if(holder.btnaceptservice.getText().equals("Aceptar")){
-                    comandoSercicio.servicoAceptadouidCliente(modelo.uid,filteredNameList.get(position).getKey(),"Aceptado");
-                    sendNotifications(filteredNameList.get(position).getToken(),"Servico","servicio aceptado");
-                    holder.btnaceptservice.setText("Detalle");
+                  try{
+                      holder.btnaceptservice.setText("Detalle");
+                      comandoSercicio.servicoAceptadouidCliente(modelo.uid,filteredNameList.get(position).getKey(),"Aceptado");
 
+                      new java.util.Timer().schedule(
+                              new java.util.TimerTask() {
+                                  @Override
+                                  public void run() {
+                                      // your code here
+
+                                      sendNotifications(filteredNameList.get(position).getToken(),"Servico","servicio aceptado");
+
+                                  }
+                              },
+                              5000
+                      );
+
+
+                  }catch (Exception ex){
+                      Log.v("exeption", ex.getMessage());
+                  }
                 }else{
 
                     /*comandoSercicio.servicoAceptadouidCliente(modelo.uid,filteredNameList.get(position).getKey(),"Terminado");
@@ -146,6 +166,7 @@ public class ServicioAdapter2 extends RecyclerView.Adapter<ServicioAdapter2.Serv
         }else{
             holder.image_fav.setBackgroundResource(R.drawable.start2);
         }
+
 
 
     }
@@ -203,6 +224,8 @@ public class ServicioAdapter2 extends RecyclerView.Adapter<ServicioAdapter2.Serv
     @Override
     public void getServicio() {
 
+        Log.v("modelo.listServicios", "list ervice"+modelo.listServicios.size());
+
 
     }
 
@@ -220,31 +243,34 @@ public class ServicioAdapter2 extends RecyclerView.Adapter<ServicioAdapter2.Serv
     public void actualizarFavorito() {
 
 
-
+        comandoSercicio.getListServicio();
     }
+
+
+
 
     class ServicioViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView image_fav;
+
         private TextView text_dir;
         private TextView text_nombre;
         private TextView text_fecha;
-        private TextView txt_estado;
-        private LinearLayout layuotdata;
+        private TextView text_estado;
         private Button btnaceptservice;
+        private ImageView image_fav;
 
         ServicioViewHolder(@NonNull View itemView) {
             super(itemView);
+
             image_fav = itemView.findViewById(R.id.image_fav);
             text_dir = itemView.findViewById(R.id.text_dir);
             text_nombre = itemView.findViewById(R.id.text_nombre);
             text_fecha = itemView.findViewById(R.id.text_fecha);
-            txt_estado = itemView.findViewById(R.id.txt_estado);
-            layuotdata = itemView.findViewById(R.id.layuotdata);
+            text_estado = itemView.findViewById(R.id.text_estado);
             btnaceptservice = itemView.findViewById(R.id.btnaceptservice);
+
         }
     }
-
 
     //puch
     public void sendNotifications(String usertoken, String title, String message) {
@@ -271,4 +297,5 @@ public class ServicioAdapter2 extends RecyclerView.Adapter<ServicioAdapter2.Serv
             }
         });
     }
+
 }

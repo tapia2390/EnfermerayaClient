@@ -50,6 +50,7 @@ import com.enfermeraya.enfermerayaclient.app.Modelo;
 import com.enfermeraya.enfermerayaclient.clases.Servicios;
 import com.enfermeraya.enfermerayaclient.comandos.ComandoSercicio;
 import com.enfermeraya.enfermerayaclient.comandos.ComandoService;
+import com.enfermeraya.enfermerayaclient.comandos.ComandoSetting;
 import com.enfermeraya.enfermerayaclient.models.utility.Utility;
 import com.enfermeraya.enfermerayaclient.notificacion.Token;
 import com.enfermeraya.enfermerayaclient.views.MainActivity;
@@ -91,7 +92,7 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicioChangeListener,
         OnMapReadyCallback,TimePickerDialog.OnTimeSetListener,
-        android.app.TimePickerDialog.OnTimeSetListener {
+        android.app.TimePickerDialog.OnTimeSetListener, ComandoSetting.OnComandoSettingChangeListener {
 
     private HomeViewModel homeViewModel;
     Modelo modelo = Modelo.getInstance();
@@ -118,6 +119,7 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
     List<Servicios> serList = new ArrayList<>();
     ServicioAdapter2 servicioAdapter;
     RecyclerView recyclerView;
+    ComandoSetting comandoSetting;
 
 
     @SuppressLint("WrongViewCast")
@@ -142,12 +144,14 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
         imgopaciti = (ImageView) root.findViewById(R.id.imgopaciti);
         recyclerView = root.findViewById(R.id.recycler_view2);
 
+        comandoSetting = new ComandoSetting(this);
 
         modelo.vistaservice = 0;
         utility = new Utility();
         getPreference();
         comandoSercicio = new ComandoSercicio(this);
         if (utility.estado(getActivity())) {
+            comandoSetting.getsetting();
             comandoSercicio.getListServicio();
             mapa();
             stado();
@@ -498,6 +502,11 @@ public class HomeFragment extends Fragment implements ComandoSercicio.OnSercicio
     @Override
     public void actualizarFavorito() {
 
+    }
+
+    @Override
+    public void setting() {
+        Log.v("setting", modelo.setting.getMsmcompartir());
     }
 
 

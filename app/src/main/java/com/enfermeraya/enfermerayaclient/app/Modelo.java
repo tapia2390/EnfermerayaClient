@@ -5,6 +5,7 @@ import com.enfermeraya.enfermerayaclient.clases.ClassTerminosYCondiciones;
 import com.enfermeraya.enfermerayaclient.clases.Favoritos;
 import com.enfermeraya.enfermerayaclient.clases.Historial;
 import com.enfermeraya.enfermerayaclient.clases.Servicios;
+import com.enfermeraya.enfermerayaclient.clases.Setting;
 import com.enfermeraya.enfermerayaclient.clases.TipoServicio;
 import com.enfermeraya.enfermerayaclient.clases.Usuario;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,6 +28,7 @@ public class Modelo {
     public int estado = 0;
     public int vistaservice = 0;
     public String estadoActivo;
+    public Setting setting =  new Setting();
 
     public static Modelo getInstance() {
         return ourInstance;

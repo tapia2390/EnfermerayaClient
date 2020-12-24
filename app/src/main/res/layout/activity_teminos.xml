@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/colorFondo">
+    android:background="@color/colorBlanco">
 
 
     <LinearLayout
@@ -55,7 +55,7 @@
                         android:id="@+id/terminos_condiciones_texto"
                         android:layout_marginLeft="5sp"
                         android:layout_marginRight="5sp"
-                        android:textColor="@color/colorBlanco"/>
+                        android:textColor="@color/colorVerdeOscuro"/>
                 </LinearLayout>
             </ScrollView>
 

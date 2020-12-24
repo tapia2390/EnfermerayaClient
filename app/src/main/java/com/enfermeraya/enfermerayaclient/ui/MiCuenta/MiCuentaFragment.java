@@ -33,6 +33,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Space;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -117,7 +118,7 @@ public class MiCuentaFragment extends Fragment implements ComandoPerfilFragment.
     String mCurrentPhotoPath = "";
     Utility utility;
     SweetAlertDialog pDialog;
-    LinearLayout layut1,layut2;
+    RelativeLayout layut1,layut2;
     Button btnupdate;
     Space space1;
     String tipoLogin;
@@ -143,8 +144,8 @@ public class MiCuentaFragment extends Fragment implements ComandoPerfilFragment.
         camara1 = (ImageView)root.findViewById(R.id.camara1);
         txt_camara1 = (TextView)root. findViewById(R.id.txt_camara1);
         mRlView = (LinearLayout)root. findViewById(R.id.mRlView);
-        layut1 = (LinearLayout)root. findViewById(R.id.layut1);
-        layut2 = (LinearLayout)root. findViewById(R.id.layut2);
+        layut1 = (RelativeLayout)root. findViewById(R.id.layut1);
+        layut2 = (RelativeLayout)root. findViewById(R.id.layut2);
         btnupdate =(Button)root. findViewById(R.id.btnupdate);
         space1 =(Space) root.findViewById(R.id.space1);
          btnNext = root.findViewById(R.id.btncerrar);

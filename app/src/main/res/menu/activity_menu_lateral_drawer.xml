@@ -3,57 +3,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/nav_vacio3"
+                android:title="" />
+            <item
+                android:id="@+id/nav_vacio4"
+                android:title="" />
 
-        <item
-            android:id="@+id/nav_vacio2"
-            android:title="" />
-        <item
-            android:id="@+id/nav_vacio3"
-            android:title="" />
-        <item
-            android:id="@+id/nav_vacio4"
-            android:title="" />
+            <item
+                android:id="@+id/nav_home"
+                android:icon="@drawable/ic_drawer_home"
+                android:title="Inicio"
+                android:checked="true" />
+
+            <item
+                android:id="@+id/nav_mi_cuenta"
+                android:icon="@drawable/person"
+                android:title="Mi perfil"
+                android:checked="true"/>
+
+            <item
+                android:id="@+id/nav_mis_servicios"
+                android:icon="@drawable/termonps"
+                android:title="Mis servicios"
+                android:checked="true"/>
+
+            <item
+                android:id="@+id/nav_historial"
+                android:icon="@drawable/historial"
+                android:title="Historial"
+                android:checked="true"/>
+
+            <!--item
+                android:id="@+id/nav_pagos"
+                android:icon="@drawable/pagos"
+                android:title="Pagos"
+                android:checked="true"/-->
+            <item
+                android:id="@+id/nav_recomienda"
+                android:icon="@drawable/recomendar"
+                android:title="Recomienda"
+                android:checked="true"/>
+            <item
+                android:id="@+id/nav_ayuda"
+                android:icon="@drawable/ayuda"
+                android:title="Ayuda"
+                android:checked="true"/>
+
+            <item
+                android:id="@+id/cerrasecion"
+                android:icon="@drawable/logout1"
+                android:title="Cerrar sesión."
+                android:checked="true"/>
+
+            <item
+                android:checked="true"
+                android:id="@+id/nav_legal"
+                android:title="Legal V.1.2.100" />
+        </menu>
+    </item>
 
 
-        <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/person"
-            android:title="Inicio" />
 
-        <item
-            android:id="@+id/nav_mi_cuenta"
-            android:icon="@drawable/person"
-            android:title="Mi cuenta" />
-
-        <item
-            android:id="@+id/nav_mis_servicios"
-            android:icon="@drawable/img_legal"
-            android:title="Mis servicios" />
-
-
-        <item
-            android:id="@+id/nav_mis_historial"
-            android:icon="@drawable/img_legal"
-            android:title="Historial" />
-
-
-        <item
-            android:id="@+id/nav_pagos"
-            android:icon="@drawable/img_legal"
-            android:title="Pagos" />
-
-        <item
-            android:id="@+id/nav_recomienda"
-            android:icon="@drawable/img_legal"
-            android:title="Recomienda" />
-        <item
-            android:id="@+id/nav_ayuda"
-            android:icon="@drawable/img_legal"
-            android:title="Ayuda" />
-
-        <item
-            android:id="@+id/nav_legal"
-            android:title="Legal V.1.2.100" />
-    </group>
 </menu>

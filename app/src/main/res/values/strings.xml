@@ -90,6 +90,7 @@ git push -u origin master
 
     <string name="home_second">Home Second</string>
     <!-- json key AIzaSyAb1OpcP-fi7YUTeaDtARMB4HCCNEq2rk8-->
+    <string name="copyrigth">&#169; 2020</string>
 
 
 </resources>
